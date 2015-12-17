@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>contextmenu demo</title>
+</head>
+<body>
+<p>
+  contextmunu:定义上下文菜单，可自定义鼠标右键弹出菜单
+</p>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+p{
+  height: 50px;
+  line-height: 50px;
+  background: #ccc;
+  text-indent: 2em;
+}
+ul{
+  width: 280px;
+  list-style: none;
+  border: 1px solid #b6b6b6;
+  position: absolute;
+  visibility: hidden;
+  box-shadow: 3px 3px 3px rgba(0,0,0,.3);
+  background: #fff;
+}
+ul li{
+  padding-left: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+ul li.line{
+  border-bottom: 1px solid #eaeaea;
+}
+ul li a{
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+ul li:hover{
+  background: #437ff9;
+}
+ul li:hover a{
+  color: #fff;
+}
+#myDiv{
+  width:200px;
+  height:200px;
+  margin-left: 200px;
+  margin-top: 50px;
+  line-height:200px;
+  text-align:center;
+  background:red;
+}
+</style>
+<div id="myDiv">右键点击我</div>
+<ul id="myMenu">
+  <li><a href="">返回</a></li>
+  <li><a href="">前进</a></li>
+  <li class="line"><a href="">重新加载(R)</a></li>
+  <li><a href="">另存为</a></li>
+  <li><a href="">打印</a></li>
+  <li><a href="">翻译本页面</a></li>
+  <li class="line"><a href="">查看源文件</a></li>
+  <li><a href="">审查元素</a></li>
+</ul>
+<script>
+//右键菜单
+var div = document.getElementById('myDiv');
+div.addEventListener("contextmenu",function(e){
+  e.preventDefault();
+  var menu = document.getElementById("myMenu");
+  menu.style.left = e.clientX+"px";
+  menu.style.top = e.clientY+"px";
+  menu.style.visibility = "visible";
+});
+div.addEventListener("click",function(e){
+  document.getElementById("myMenu").style.visibility = "hidden";
+});
+</script>
+</body>
+</html>

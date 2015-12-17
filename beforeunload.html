@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>beforeunload</title>
+</head>
+<body>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+p{
+  height: 50px;
+  line-height: 50px;
+  background: #ccc;
+  text-indent: 2em;
+}
+</style>
+<p>
+  beforeunload：在此定义的事件，在页面被卸载之前会触发。比如：在点击刷新，跳转或关闭等后弹出对话框问你是否离开此页面。
+</p>
+<p>第一种情况：DOM0级事件绑定</p>
+<pre>
+	//通过DOM0级事件绑定，可以直接return
+	//并且兼容IE8、chrome
+	window.onbeforeunload = function(){
+	  return "请不要关闭我！";
+	}
+</pre>
+<p>第二种情况：IE事件绑定</p>
+<pre>
+	//IE事件绑定，必须要设置event.returnValue
+	//直接return不行
+	window.attachEvent("onbeforeunload",function(event){
+	  event.returnValue = "真的要关闭我么？";
+	})
+</pre>
+<p>第三种情况：兼容性措施，不用return也可以。。。</p>
+<pre>
+	//通过DOM2级或IE事件绑定，可以不用return
+	//兼容IE8、chrome
+	EventUtil = {
+	  addHandler : function(ele, type, handle){
+		if (ele.addEventListener) {
+		  return ele.addEventListener(type,handle,false);
+		}else if (ele.attachEvent) {
+		  return ele.attachEvent("on"+type,handle);
+		}else{
+		  return ele["on"+type] = handle;
+		};
+	  }
+	}
+	EventUtil.addHandler(window,"beforeunload",function(e){
+	  e = e || window.event;
+	  var mes = "要关闭我么？"
+	  e.returnValue = mes;
+	})
+</pre>
+<p>最终方案！高程第三版说需要return，那么加上好了，注意黑体</p>
+<pre>
+	//通过DOM2级或IE事件绑定，可以不用return
+	//兼容IE8、chrome
+	EventUtil = {
+	  addHandler : function(ele, type, handle){
+		if (ele.addEventListener) {
+		  return ele.addEventListener(type,handle,false);
+		}else if (ele.attachEvent) {
+		  return ele.attachEvent("on"+type,handle);
+		}else{
+		  return ele["on"+type] = handle;
+		};
+	  }
+	}
+	EventUtil.addHandler(window,"beforeunload",function(e){
+	  e = e || window.event;
+	  var mes = "要关闭我么？"
+	  <b>e.returnValue = mes;</b>
+	})
+</pre>
+<script>
+//通过DOM0级来绑定事件
+// window.onbeforeunload = function(){
+// 	return "请不要关闭我！";
+// }
+
+//兼容方案
+EventUtil = {
+	addHandler : function(ele, type, handle){
+		if (ele.addEventListener) {
+			return ele.addEventListener(type,handle,false);
+		}else if (ele.attachEvent) {
+			return ele.attachEvent("on"+type,handle);
+		}else{
+			return ele["on"+type] = handle;
+		};
+	}
+}
+EventUtil.addHandler(window,"beforeunload",function(e){
+	e = e || window.event;
+	var mes = "要关闭我么？"
+	e.returnValue = mes;
+	return mes;
+})
+
+//通过IE事件绑定
+// window.attachEvent("onbeforeunload",function(event){
+// 	event.returnValue = "真的要关闭我么？";
+// })
+</script>
+</body>
+</html>
