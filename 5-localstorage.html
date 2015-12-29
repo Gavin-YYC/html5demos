@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>localstorage</title>
+</head>
+<body>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+ul.menu{
+	list-style: none;
+	margin: 20px 0 0 20px;
+}
+ul.menu>li{
+	width: 150px;
+	line-height: 40px;
+	border-bottom: 1px solid #ddd;
+	background: red;
+}ul.menu>li>a{
+	display: block;
+	width: 100%;
+	height: 40px;
+}
+ul.submenu{
+	list-style: none;
+	background: #ccc;
+	width: 150px;
+	display: none;
+}
+</style>
+<ul class="menu">
+	<li>
+		<a href="">菜单一</a>
+		<ul class="submenu">
+			<li>子菜单一</li>
+			<li>子菜单二</li>
+			<li>子菜单三</li>
+			<li>子菜单四</li>
+		</ul>
+	</li>
+	<li>
+		<a href="">菜单二</a>
+		<ul class="submenu">
+			<li>子菜单一</li>
+			<li>子菜单一</li>
+			<li>子菜单一</li>
+			<li>子菜单一</li>
+		</ul>
+	</li>
+	<li>
+		<a href="">菜单三</a>
+		<ul class="submenu">
+			<li>子菜单一</li>
+			<li>子菜单二</li>
+			<li>子菜单三</li>
+			<li>子菜单四</li>
+		</ul>
+	</li>
+	<li>
+		<a href="">菜单四</a>
+		<ul class="submenu">
+			<li>子菜单一</li>
+			<li>子菜单二</li>
+			<li>子菜单三</li>
+			<li>子菜单四</li>
+		</ul>
+	</li>
+</ul>
+<script type="text/javascript">
+var li = document.querySelectorAll(".menu>li>a");
+var sub = document.querySelectorAll(".submenu");
+function subShow(i){
+	return function(e){
+		value = sub[i].style.display;
+		e = e || window.event;
+		if (value == null || value == '' || value == 'none') {
+			sub[i].style.display = "block";
+			localStorage.setItem("memoryMenu"+i,"block");
+		}else{
+			sub[i].style.display = "none";
+			localStorage.removeItem("memoryMenu"+i);
+		};
+		if(e.preventDefault){
+			e.preventDefault();
+		}else{
+			e.returnValue = false;
+		}
+	}
+}
+for (var i = 0; i < li.length; i++) {
+	li[i].onclick = subShow(i);
+};
+//页面初始化时检测哪个菜单是打开的
+for(var key in localStorage ){
+	if (key.indexOf("memoryMenu")>=0) {
+		key = parseInt(key.slice(10));
+		sub[key].style.display = "block";
+	};
+}
+</script>
+</body>
+</html>
