@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>js drag demo</title>
+</head>
+<body>
+<style>
+#box{
+	width:200px;
+	height:200px;
+	background:red;
+	position:absolute;
+	cursor:pointer;
+}
+#box2{
+	width:200px;
+	height:200px;
+	background:green;
+	position:absolute;
+	cursor:pointer;
+}
+</style>
+<div id="box">拖动我</div>
+<div id="box2">拖动我呀～～</div>
+<script>
+window.onload = function(){
+	new Drag("box")
+	new Drag("box2")
+}
+function Drag(id){
+	var self = this;
+	this.box = document.getElementById(id);
+	this.box.onmousedown = function(e){
+		self.goDown(e)
+	}
+}
+
+Drag.prototype.goDown = function(e){
+	var self = this;
+	var e = e || event;
+	this.target = e.target || e.srcELement;
+	this.disX = e.clientX - this.target.offsetLeft;
+	this.disY = e.clientY - this.target.offsetTop;
+
+	document.onmousemove = function(e){
+		self.goMove(e);	
+		return;
+	}
+
+	document.onmouseup = function(){
+		self.goUp();
+	}
+
+}
+
+Drag.prototype.goMove = function(e){
+	var e = e || event;
+	this.target.style.left = e.clientX - this.disX + "px";
+	this.target.style.top = e.clientY - this.disY + "px";	
+
+	if(parseInt(this.target.style.left) <= 0){
+		this.target.style.left = 0 + "px";
+	};
+	if((parseInt(this.target.style.left) + this.target.offsetWidth) >= document.documentElement.clientWidth){
+		this.target.style.left = document.documentElement.clientWidth - this.target.offsetWidth + "px";
+	};
+	if(parseInt(this.target.style.top) <= 0){
+		this.target.style.top = 0 + "px";
+	};
+	if((parseInt(this.target.style.top) + this.target.offsetHeight) >= document.documentElement.clientHeight){
+		this.target.style.top = document.documentElement.clientHeight - this.target.offsetHeight + "px";
+	};
+};
+
+Drag.prototype.goUp = function(){
+	document.onmousemove = null;	
+	document.onmouseup = null;	
+}
+</script>
+</body>
+</html>
