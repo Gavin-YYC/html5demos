@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>online and offline</title>
+</head>
+<body>
+
+<script type="text/javascript">
+window.addEventListener("online", onFunction);
+window.addEventListener("offline", offFunction);
+
+function onFunction() {
+    alert ("Your browser is working online.");
+    save();
+}
+
+function offFunction() {
+    alert ("Your browser is working offline.");
+    save();
+}
+
+function save(){
+    if(navigator.onLine){
+        document.body.innerHTML = "数据同步";
+    }else{
+        document.body.innerHTML = "数据保存到本地！";
+    }
+}
+</script>
+
+</body>
+</html>
