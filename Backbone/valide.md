@@ -126,3 +126,6 @@
     });
     // 输入初始化的时候传入的数据
     console.log( model.get("job") ) // fe
+
+
+![pic](http://7mj4a6.com1.z0.glb.clouddn.com/backbone-save.png)
