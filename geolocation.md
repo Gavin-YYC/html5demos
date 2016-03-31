@@ -45,8 +45,8 @@ GeoLocation有三个方法：`getCurrentPosition()`，`watchPosition()`，`clear
 
 请求成功后，返回数据对象，其信息为：
 
-| 属性 | 描述 |
-|--|--|
+| 属性             |         描述 |
+|-----------------|--------------|
 | coords.latitude | 十进制数的纬度 |
 | coords.longitude | 十进制数的经度 |
 | coords.accuracy | 位置精度 |
