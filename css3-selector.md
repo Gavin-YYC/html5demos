@@ -5,7 +5,7 @@
 ## 1、伪元素
 
   利用伪元素实现首字母下沉效果与首行效果：[http://sandbox.runjs.cn/show/dcwznqvt 
-](http://sandbox.runjs.cn/show/dcwznqvt )
+](http://sandbox.runjs.cn/show/dcwznqvt)
 
 * `::first-letter`选中元素中的首字母 
 
