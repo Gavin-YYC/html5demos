@@ -66,3 +66,7 @@ content属性的设置很灵活，可以这是计数器，对页面元素进行�
 	<a class="font font_close"></a>
 
 即可引入图标。
+
+## 4、css3选择器知识树
+
+![css3-selector.png](http://7mj4a6.com1.z0.glb.clouddn.com/css3-selector.png)
