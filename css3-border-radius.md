@@ -180,3 +180,7 @@
 ## 7、兼容性
 
 ![](http://7mj4a6.com1.z0.glb.clouddn.com/4253434.png)
+
+## 6、Demo
+
+[Demo 滑块与小女孩](http://sandbox.runjs.cn/show/emod5wvr)
