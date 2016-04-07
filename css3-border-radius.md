@@ -184,3 +184,5 @@
 ## 6、Demo
 
 [Demo 滑块与小女孩](http://sandbox.runjs.cn/show/emod5wvr)
+
+<iframe style="width: 100%; height: 600px" src="http://sandbox.runjs.cn/show/rmy7ej7i" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
