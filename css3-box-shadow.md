@@ -224,5 +224,6 @@
 
 # 六、参考链接
 
-https://www.w3.org/TR/css3-background/#box-shadow
-http://www.w3cplus.com/content/css3-box-shadow
+* [https://www.w3.org/TR/css3-background/#box-shadow](https://www.w3.org/TR/css3-background/#box-shadow)
+* [http://www.w3cplus.com/content/css3-box-shadow]http://www.w3cplus.com/content/css3-box-shadow()
+* [更多Drop shadow效果](http://nicolasgallagher.com/css-drop-shadows-without-images/demo/)
