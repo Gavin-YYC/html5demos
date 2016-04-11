@@ -98,3 +98,6 @@ DEMO地址：[watchPosition](http://sandbox.runjs.cn/show/ptjwtkat)
 这是一种对用户信息的一种保密，一般用户可以在自己的浏览器上设置位置信息对哪些网站可用，比如chrome，在高级设置的隐私设置中：
 
 ![pic](http://7mj4a6.com1.z0.glb.clouddn.com/20160330042606274.png)
+
+## 9、推荐链接
+[https://developers.google.com/web/fundamentals/native-hardware/user-location/?hl=en](https://developers.google.com/web/fundamentals/native-hardware/user-location/?hl=en)
