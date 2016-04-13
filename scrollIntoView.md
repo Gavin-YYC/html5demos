@@ -57,3 +57,13 @@
 ## 4、浏览器兼容性
 
 ![浏览器兼容性：http://7mj4a6.com1.z0.glb.clouddn.com/23482348923.png](http://7mj4a6.com1.z0.glb.clouddn.com/23482348923.png)
+
+## 资料来源
+
+* [https://www.w3.org/TR/2009/WD-html5-20090423/editing.html#dom-scrollintoview](https://www.w3.org/TR/2009/WD-html5-20090423/editing.html#dom-scrollintoview)
+
+* [https://msdn.microsoft.com/en-us/library/ms536730(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/ms536730(v=vs.85).aspx)
+
+* [https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded)
+
+* [http://caniuse.com/#search=scrollintoview](http://caniuse.com/#search=scrollintoview)
