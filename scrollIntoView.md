@@ -48,7 +48,7 @@
 
 ## 3、具体示例
 
-[Demo地址](http://sandbox.runjs.cn/show/u1ogecdw)
+  [Demo地址](http://sandbox.runjs.cn/show/u1ogecdw)
 
 > 注意：节点可能不会特别准确的滚动到滚动区域的上边界或者下边界，这取决于其他元素的布局。
 
@@ -57,6 +57,14 @@
 ## 4、浏览器兼容性
 
 ![浏览器兼容性：http://7mj4a6.com1.z0.glb.clouddn.com/23482348923.png](http://7mj4a6.com1.z0.glb.clouddn.com/23482348923.png)
+
+## 5、scrollIntoViewIfNeeded(align)
+
+该属性和`scrollIntoView`属性类似，不同的是，这个属性可以实现自我判断，只有元素不在可视区域内才会滚动到可视区。
+
+如果元素已经在可视区，则不会发生滚动。
+
+该方法同样接受一个参数，是否居中显示，`true`表示垂直居中， `false`表示什么都不做。
 
 ## 5、资料来源
 
