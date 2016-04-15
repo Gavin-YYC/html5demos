@@ -92,6 +92,12 @@ css的`text-overflow`属性是用来解决当文本超出元素范围时该怎�
 
 另外一个老版本的属性是：`ellipsis-word`，过去`text-overflow`是`text-overflow-mode`与`text-overflow-ellipsis`的缩写，现在那些单独的属性都不存在了。
 
+## 6、浏览器兼容性
+
+![](http://7mj4a6.com1.z0.glb.clouddn.com/362468298.png)
+
+## 7、参考文档
+
 * [多行文本溢出显示省略号(...)的方法](http://c7sky.com/text-overflow-ellipsis-on-multiline-text.html)
 
 * [text-overflow](https://css-tricks.com/almanac/properties/t/text-overflow/)
