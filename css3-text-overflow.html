@@ -31,6 +31,15 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      .text-overflow-multy-line {
+        word-break: normal;
+        height: 120px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
       .demo ol {
         margin: 0;
         padding: 0;
@@ -41,38 +50,57 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      .text-overflow {
+        clear: both;
+      }
     </style>
   </head>
   <body>
-    <h1>css3 text-overflow</h1>
-    <div class="notice">需要注意：同时设置宽度、overflow: hidden、white-space: nowrap</div>
-    <div class="text text-overflow-normal">
-      <span>正常情况</span><br><br><br>
-      苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
+    <div class="text-overflow">
+      <h1>css3 text-overflow</h1>
+      <div class="notice">需要注意：同时设置宽度、overflow: hidden、white-space: nowrap</div>
+      <div class="text text-overflow-normal">
+        <span>正常情况</span><br><br><br>
+        苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
+      </div>
+      <div class="text text-overflow-clip">
+        <span>white-space: nowrap;<br>text-overflow: clip;</span><br><br><br>
+        苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
+      </div>
+      <div class="text text-overflow-ellipsis">
+        <span>white-space: nowrap;<br>text-overflow: ellipsis;</span><br><br><br>
+        苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
+      </div>
+      <div class="text text-overflow-multy-line">
+        苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦黄烦烦苏黄烦烦烦黄烦烦苏黄烦烦
+      </div>
+      <div class="text demo">
+        <ol>
+          <li>1、如何使用css呢，谁能帮帮我啊</li>
+          <li>2、他会css，你咋不求助他？</li>
+          <li>3、他是谁？</li>
+          <li>4、这个我也不知道</li>
+          <li>5、新闻界我是第一个吃雪糕的</li>
+          <li>6、还是你厉害</li>
+          <li>7、谁厉害？说明白</li>
+          <li>8、他说我厉害？</li>
+          <li>9、不是，你是吃雪糕的人！</li>
+          <li>10、他又猜不对，老是猜不对</li>
+          <li>11、他不会css，还说会！</li>
+          <li>12、对，你就是这么不要脸的人！</li>
+        </ol>
+      </div>
     </div>
-    <div class="text text-overflow-clip">
-      <span>white-space: nowrap;<br>text-overflow: clip;</span><br><br><br>
-      苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
-    </div>
-    <div class="text text-overflow-ellipsis">
-      <span>white-space: nowrap;<br>text-overflow: ellipsis;</span><br><br><br>
-      苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦苏黄烦烦
-    </div>
-    <div class="text demo">
-      <ol>
-        <li>1、如何使用css呢，谁能帮帮我啊</li>
-        <li>2、他会css，你咋不求助他？</li>
-        <li>3、他是谁？</li>
-        <li>4、这个我也不知道</li>
-        <li>5、新闻界我是第一个吃雪糕的</li>
-        <li>6、还是你厉害</li>
-        <li>7、谁厉害？说明白</li>
-        <li>8、他说我厉害？</li>
-        <li>9、不是，你是吃雪糕的人！</li>
-        <li>10、他又猜不对，老是猜不对</li>
-        <li>11、他不会css，还说会！</li>
-        <li>12、对，你就是这么不要脸的人！</li>
-      </ol>
+    <div class="white-space">
+      <div class="space normal">
+
+      </div>
+      <div class="space pre">
+
+      </div>
+      <div class="space pre-line">
+
+      </div>
     </div>
   </body>
 </html>
