@@ -34,13 +34,13 @@ Demo地址：[http://sandbox.runjs.cn/show/whzwpxw9](http://sandbox.runjs.cn/sho
 
 > 同时书写两种形式，向前兼容。
 
-## 5、浏览器兼容性
+## 3、浏览器兼容性
 
 word-wrap所有浏览器都兼容。overflow-wrap的兼容性如下：
 
 ![](http://7mj4a6.com1.z0.glb.clouddn.com/1264319264.png)
 
-## 6、参考文档
+## 4、参考文档
 
 * [https://drafts.csswg.org/css-text-3/#overflow-wrap-property](https://drafts.csswg.org/css-text-3/#overflow-wrap-property)
 * [Word Wrap / Overflow Wrap](http://css3clickchart.com/#overflow-wrap)
