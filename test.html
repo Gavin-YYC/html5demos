@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no">
+    <title>tags</title>
+    <style media="screen">
+      html {
+        font-size: 70px;
+      }
+      .tag {
+        width: 1.2rem;
+        height: .7rem;
+        display: block;
+        background: red;
+        position: relative;
+        border-top-left-radius: 0.12rem;
+        border-bottom-left-radius: 0.12rem;
+        line-height: .7rem;
+        text-align: center;
+        color: #fff;
+        font-size: .34rem;
+      }
+      .tag::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -.4rem;
+        width: .4rem;
+        height: .7rem;
+        background: red;
+        border-radius: 0;
+        border-top-right-radius: 1rem 0.5rem;
+        border-bottom-right-radius: 1rem 0.5rem;
+      }
+      .tag .triangle {
+        position: absolute;
+        top: .15rem;
+        right: -.78rem;
+        width: 0;
+        height: 0;
+        display: block;
+        border-style: solid;
+        border-width: .2rem;
+        border-color: transparent transparent transparent red;
+      }
+      .tag .circle {
+        position: absolute;
+        width: 0.16rem;
+        height: 0.16rem;
+        background-color: #fff;
+        border-radius: 0.16rem;
+        top: 50%;
+        right: -.2rem;
+        z-index: 1;
+        margin-top: -0.08rem;
+      }
+    </style>
+  </head>
+  <body>
+    <i class="tag"><span class="triangle"></span><span class="circle"></span>满3赠1</i>
+  </body>
+</html>
