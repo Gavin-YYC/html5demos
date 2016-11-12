@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>demo1 hello world</title>
+    <script src="../vue.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="test">
+      <p>{{section1}}</p>
+
+      <p>{{section2}}</p>
+      <ul>
+        <li v-for="tab in tabs">
+          {{tab.text}}
+        </li>
+      </ul>
+
+      <p>{{section3}}</p>
+      <ul>
+        <li v-for="tab in tabs" v-if="tab.num % 2 == 0">{{tab.text}} - {{tab.num}}</li>
+      </ul>
+
+      <p>{{section4}}</p>
+      <button v-on:click="removeItem">removeItem</button>
+
+      <p>{{section5}}:{{message}}</p>
+      <input type="text" v-model="message">
+
+      <p>{{section6}}</p>
+      <my-component v-for="tab in tabs" v-bind:tab="tab"></my-component>
+    </div>
+
+    <script type="text/javascript">
+
+    // 定义组件
+    Vue.component('my-component', {
+      template: '<li>{{tab.text}}</li>',  // 模板
+      props: ['tab']
+    })
+
+    var app = new Vue({
+
+      // 元素
+      el: '#test',
+
+      // 数据
+      data: {
+        section1: '测试文本',
+        section2: '循环指令：v-for',
+        section3: '控制指令：v-if',
+        section4: '事件指令：v-on',
+        section5: '表单指令：v-model',
+        section6: '定义组件',
+
+        message: 'text',
+
+        tabs: [
+          {text: '<a>巴士</a>', num: 1},
+          {text: '快车', num: 2},
+          {text: '专车', num: 3},
+          {text: '顺风车', num: 4},
+          {text: '出租车', num: 5},
+          {text: '代驾', num: 6}
+        ]
+      },
+
+      // 事件
+      methods: {
+        removeItem: function () {
+          this.tabs.pop();
+        }
+      }
+    });
+    </script>
+  </body>
+</html>

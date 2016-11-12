@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>demo 2 组件声明周期与指令</title>
+    <script src="../vue.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+
+  <!--插值语法不能使用到标签属性中，如果要使用，必须得用v-bind指令-->
+  <div id="test2">
+    <ul class="test nid" :id="className" @mouseover="overMe" v-on:click.prevent="showMe" v-bind:class="'my-' + className">
+      <li v-once v-html v-for="tab in tabs">{{tab.text | myFilter('m') | filter2}}</li>
+    </ul>
+  </div>
+
+
+  <script type="text/javascript">
+
+  var data = {
+    tabs: [
+      {text: 1},
+      {text: 2},
+      {text: '<span>alert("a")</span>'}
+    ],
+    className: 'active'
+  };
+
+  // Vue 实例
+  var app = new Vue({
+    // 挂载元素
+    el: '#test2',
+
+    // 数据
+    data: data,
+
+    // 过滤器
+    filters: {
+      myFilter: function ( source, params ) {
+        console.log( params );
+        return source + new Date();
+      },
+      filter2: function ( source ) {
+        console.log( source );
+        return source + '--';
+      }
+    },
+
+    // 事件
+    methods: {
+      showMe: function ( e ) {
+        console.log( e );
+      },
+      overMe: function ( e ) {
+        console.log( e );
+      }
+    },
+
+    // 生命周期
+    beforeCreate: function () {
+      console.log("1、Vue即将创建!");
+    },
+    created: function () {
+      console.log("2、Vue已经创建完毕!");
+    },
+    beforeMount: function () {
+      console.log("3、模板、元素即将挂载");
+    },
+    mounted: function () {
+      console.log("4、模板、元素挂在完毕");
+    },
+    beforeUpdate: function () {
+      console.log("5、元素更新");
+    },
+    updated: function () {
+      console.log("6、元素已经更新");
+    },
+    beforeDestroy: function () {
+      console.log("7、Vue示例即将销毁");
+    },
+    destroyed: function () {
+      console.log("8、Vue实例已经销毁");
+    }
+  });
+
+  // 新增元素
+  app.tabs.push({text: 3});
+
+  // 示例销毁
+  setTimeout(function () {
+    app.$destroy();
+  }, 1000);
+
+  </script>
+  </body>
+</html>
