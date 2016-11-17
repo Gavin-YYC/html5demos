@@ -1,18 +1,19 @@
 module.exports = {
   entry: './main.js',
   output: {
-    filename: 'build.js',
-    path: __dirname
+    path: __dirname,
+    filename: 'build.js'
   },
   module: {
     loaders: [
       {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      },
+      {
         test: /\.vue$/,
         loader: 'vue'
-      }, {
-          test: /\.js$/,
-          loader: 'babel',
-          exclude: /node_modules/
       }
     ]
   },

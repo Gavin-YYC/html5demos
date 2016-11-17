@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use( Vuex )
+Vue.use(Vuex)
 
 const state = {
   notes: [],
@@ -9,37 +9,31 @@ const state = {
 }
 
 const mutations = {
-  // 增加笔记
-  ADD_NOTE ( state ) {
+  ADD_NOTE (state) {
     const newNote = {
       text: 'New note',
-      favorite: fals
+      favorite: false
     }
-    state.notes.push( newNote )
+    state.notes.push(newNote)
     state.activeNote = newNote
   },
 
-  // 编辑笔记
-  EDIT_NOTE ( state, text ) {
+  EDIT_NOTE (state, text) {
     state.activeNote.text = text
   },
 
-  // 删除笔记
-  DELETE_NOTE ( state ) {
-    state.notes.$remove( state.activeNote )
+  DELETE_NOTE (state) {
+    state.notes.$remove(state.activeNote)
     state.activeNote = state.notes[0]
   },
 
-  // 收藏\取消收藏笔记
-  TOGGLE_FAVORITE ( state ) {
+  TOGGLE_FAVORITE (state) {
     state.activeNote.favorite = !state.activeNote.favorite
   },
 
-  // 标记活跃笔记
-  SET_ACTIVE_NOTEE( state, note ) {
+  SET_ACTIVE_NOTE (state, note) {
     state.activeNote = note
   }
-
 }
 
 export default new Vuex.Store({
