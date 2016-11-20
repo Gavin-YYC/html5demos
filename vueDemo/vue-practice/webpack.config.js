@@ -1,4 +1,5 @@
-var path = require('path');
+var path = require('path')
+var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -26,7 +27,18 @@ module.exports = {
     // 自动生成index.html，添加script标签、hash值
     new HtmlWebpackPlugin({
       title: 'Gavin todolist',
-      hash: true
+      hash: true,
+      template: './src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: 'production'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
     })
   ],
   babel: {
