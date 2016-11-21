@@ -3,10 +3,10 @@ import App from './components/app.vue'
 import VueRouter from 'vue-router'
 
 // 引入store
-import store from './lib/store'
+import store from './store/index'
 
 // 引入router
-import router from './lib/router'
+import router from './router/index'
 
 // 引入存储
 import storage from './lib/storage'
