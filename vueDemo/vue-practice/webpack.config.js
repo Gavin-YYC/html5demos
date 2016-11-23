@@ -4,7 +4,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    vender: ['vue', 'vuex', 'element-ui'],
+    bundle: './src/main.js'
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'build.js'
@@ -18,9 +21,6 @@ module.exports = {
       }, {
         test: /\.vue$/,
         loader: 'vue'
-      }, {
-        test: /\.css$/,
-        loaders: ['style', 'css']
       }, {
 			  test:/\.css$/,
   			loader: ExtractTextPlugin.extract("style-loader", "css-loader")
@@ -38,19 +38,15 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  
+
   plugins: [
     new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.CommonsChunkPlugin('vender',  'vender.js'),
     // 自动生成index.html，添加script标签、hash值
     new HtmlWebpackPlugin({
       title: 'Gavin todolist',
       hash: true,
       template: './src/index.html'
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     })
   ],
 
@@ -59,4 +55,22 @@ module.exports = {
   },
 
   devtool: false
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    })
+  ])
 }
