@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>canvas hello world</title>
+    <style media="screen">
+      #canvas {
+        border: 1px solid #ddd;
+      }
+      #canvas2 {
+        border: 1px solid #ddd;
+        width: 600px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      canvas元素大小，绘图大小。canvas的width与height属性会同时改变两者，而style的width与height，只改变元素大小，绘图大小还是默认的300*150
+    </p>
+    <canvas id="canvas" width="600" height="300">Canvas not suppouted!</canvas>
+    <canvas id="canvas2">Canvas not suppouted!</canvas>
+    <script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
+    var canvas2 = document.querySelector('#canvas2');
+    var context = canvas.getContext('2d');
+    var context2 = canvas2.getContext('2d');
+    context.font = '38px Arial';
+    context.fillStyle = 'cornflowerblue';
+    context.strokeStyle = 'blue';
+    context.fillText('hello canvas', canvas.width / 2 - 150, canvas.height / 2 + 15);
+    context.strokeText('hello canvas', canvas.width / 2 - 150, canvas.height / 2 + 15);
+
+    context2.font = '38px Arial';
+    context2.fillStyle = 'cornflowerblue';
+    context2.strokeStyle = 'blue';
+    context2.fillText('hello canvas', canvas2.width / 2 - 150, canvas2.height / 2 + 15);
+    context2.strokeText('hello canvas', canvas2.width / 2 - 150, canvas2.height / 2 + 15);
+    </script>
+  </body>
+</html>
