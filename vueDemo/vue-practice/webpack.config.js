@@ -6,13 +6,13 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 module.exports = {
   entry: {
     'vender': ['vue', 'vuex', 'vue-router'],
-    './cms/lib/element-ui': ['element-ui'],
-    './cms/lib/main': path.resolve(__dirname,'src/main.js')
+    './common/element-ui': ['element-ui'],
+    './main/main': path.resolve(__dirname,'src/main.js')  // cms 入口文件
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publishPath: 'dist/',
-    filename: '[name].js'
+    filename: '[name]-[hash].js'
   },
   module: {
     loaders: [
@@ -22,50 +22,39 @@ module.exports = {
         exclude: /(node_modules|operation)/
       }, {
         test: /\.vue$/,
+        exclude: /operation/,
         loader: 'vue'
       }, {
 			  test:/\.css$/,
+        exclude: /operation/,
   			loader: ExtractTextPlugin.extract("style-loader", "css-loader")
   		}, {
-  			test: /\.(woff2?|eot|ttf)(\?.*)?$/,
-  			loader: 'url',
-  			query: {
-  				limit: 10000,
-  				name: 'fonts/[name].[ext]'
-  			}
-  		}
+        test:  /\.less$/,
+        loader:  "style!css!less"
+      }
     ]
   },
 
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('style.css'),
 
     // 公共文件打包，避免业务重复打包
-    new webpack.optimize.CommonsChunkPlugin('vender',  'vender.js'),
+    new webpack.optimize.CommonsChunkPlugin('vender',  './common/vender-[hash].js'),
 
     // 生成CMS主页
     new HtmlWebpackPlugin({
-      title: 'Gavin todolist',
-      hash: true,
+      title: 'CMS',
       filename: 'index.html',
       template: './src/index.html'
-    }),
-
-    // 生成活动主页
-    new HtmlWebpackPlugin({
-      title: '活动页面',
-      hash: true,
-      filename: 'operation/index.html',
-      template: './src/operation/index.html'
     })
   ],
 
   babel: {
     presets: ['es2015']
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
 
   devtool: 'cheap-module-source-map'
