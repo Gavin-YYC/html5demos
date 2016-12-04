@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>实现双向绑定</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="test">
+      {{test}}
+    </div>
+    <script type="text/javascript">
+
+    // 将节点劫持到Fragment中
+    function nodeToFragment ( node, vm ) {
+      var flag = document.createDocumentFragment();
+      var child;
+      while( child = node.firstChild ) {
+        compile( child, vm );
+        flag.append( child ); // 节点劫持
+      }
+      return flag;
+    }
+
+    // compile
+    function compile ( node, vm ) {
+      var reg = /\{\{(.*)\}\}/;
+      // 节点类型为元素
+      if ( node.nodeType === 1 ) {
+        var attr = node.attributes;
+        // 属性解析
+        for (var i = 0, len = attr.length; i < len; i++) {
+          if ( attr[i].nodeName == 'v-model' ) {
+            var name = attr[i].nodeValue;
+            node.addEventListener('input', function ( e ) {
+              vm[name] = e.target.value;
+            });
+            node.value = vm[name];
+            node.removeAttribute('v-model');
+          }
+        }
+      }
+
+      // 节点类型为text
+      if ( node.nodeType === 3 ) {
+        if ( reg.test( node.nodeValue ) ) {
+          var name = RegExp.$1;
+          name = name.trim();
+          // node.nodeValue = vm[name];
+          // 每个文本/输出节点，放一个观察者
+          new Watcher( vm, node, name );
+        }
+      }
+    }
+
+    function Vue ( options ) {
+      this.data = options.data;
+
+      var data = this.data;
+
+      observer( data, this );
+
+      var id = options.el;
+      var dom = nodeToFragment( document.getElementById( id ), this );
+      document.getElementById( id ).appendChild( dom );
+    }
+
+    function defineReactive ( obj, key, val ) {
+      var dep = new Dep();
+      Object.defineProperty( obj, key, {
+        get: function () {
+          if ( Dep.target ) {
+            dep.addSub( Dep.target );
+          }
+          return val;
+        },
+        set: function ( newValue ) {
+          if ( newValue === val ) {
+            return;
+          } else {
+            val = newValue;
+            dep.notify();
+          }
+        }
+      })
+    }
+
+    function observer ( obj, vm ) {
+      Object.keys( obj ).forEach( function ( key ) {
+        defineReactive( vm, key, obj[key] );
+      });
+    }
+
+    function Watcher ( vm, node, name ) {
+      Dep.target = this;
+      this.name = name;
+      this.node = node;
+      this.vm = vm;
+      this.update();
+      Dep.target = null;
+    }
+
+    Watcher.prototype = {
+      update: function () {
+        this.get();
+        this.node.nodeValue = this.value;
+      },
+      get: function () {
+        this.value = this.vm[ this.name ];
+      }
+    }
+
+    function Dep () {
+      this.subs = [];
+    }
+
+    Dep.prototype = {
+      addSub: function ( sub ) {
+        this.subs.push( sub );
+      },
+      notify: function () {
+        this.subs.forEach( function ( sub ) {
+          sub.update();
+        })
+      }
+    }
+
+    var vm = new Vue({
+      el: 'app',
+      data: {
+        test: 'hello fqw'
+      }
+    })
+    </script>
+  </body>
+</html>
