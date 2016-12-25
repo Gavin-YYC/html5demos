@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>web component 延迟加载的模板</title>
+  </head>
+  <body>
+    <div class="message">
+
+    </div>
+
+    <template id="aTemplate">
+      <img src="xxx" alt="" id="profileImage">
+      <script type="text/javascript">
+      alert('this is a script.');
+      </script>
+    </template>
+
+    <script type="text/javascript">
+      /*
+       * 模板默认是不显示的，需要手动激活
+       * 所以模板内容总是延迟加载的，这不利于SEO
+       */
+      (function () {
+        var imageElement = document.querySelector('#profileImage'),
+            messageElement = document.querySelector('.message');
+            messageElement.innerHTML = "IMG element " + imageElement;
+      })()
+    </script>
+  </body>
+</html>

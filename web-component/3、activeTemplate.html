@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>web component 激活模板</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+    </div>
+
+    <template id="aTemplate">
+      <h1>通过克隆节点，模板被激活！</h1>
+    </template>
+
+    <script type="text/javascript">
+      /*
+       * 激活模板
+       * 模板默认都是惰性的，不在DOM结构中，可以通过两种方式激活
+       * 1、克隆节点
+       * 2、导入节点
+       * 克隆节点的方式为：
+       * node.cloneNode( Boolean param )
+       * 参数为true，表示深复制，同时也会复制子元素
+       * 参数为false，表示浅复制，子元素不会复制
+       */
+
+      var aTemplate = document.querySelector('#aTemplate'),
+          container = document.querySelector('.container'),
+
+          // 通过content获取模板内容
+          templateContent = aTemplate.content,
+
+          // 克隆节点的方式激活
+          activeContent = templateContent.cloneNode( true );
+
+      container.appendChild( activeContent );
+    </script>
+  </body>
+</html>

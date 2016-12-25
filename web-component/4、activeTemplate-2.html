@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>web component 激活模板</title>
+  </head>
+  <body>
+    <div class="container">
+
+    </div>
+    <template id="aTemplate">
+      <h1>通过节点导入，模板激活！</h1>
+    </template>
+    <script type="text/javascript">
+      /*
+       * 节点导入 -- 激活模板
+       * document.importNode( target Node, Boolean param );
+       * 第一个参数表示导入的模板
+       * 第二个参数是表示深复制还是浅复制： true or false
+       */
+      var aTemplate = document.querySelector('#aTemplate'),
+          container = document.querySelector('.container'),
+
+          templateContent = aTemplate.content,
+
+          activeContent = document.importNode( templateContent, true );
+
+      container.appendChild( activeContent );
+    </script>
+  </body>
+</html>

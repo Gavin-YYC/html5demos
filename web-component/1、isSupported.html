@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>web component</title>
+  </head>
+  <body>
+    <h1 id="message"></h1>
+    <script type="text/javascript">
+    /*
+     * 检查是否支持模板特性
+     * template只有一个只读的属性‘content’
+     * 其为Document.Fragment类型
+     */
+    var isTemplateSupported = function () {
+      var template = document.createElement('template');
+      return 'content' in template;
+    }
+
+    var isSupport = isTemplateSupported();
+    var message = document.querySelector('#message');
+
+    if ( isSupport ) {
+      message.innerHTML = 'supported';
+    } else {
+      message.innerHTML = 'not supported';
+    }
+    </script>
+  </body>
+</html>
