@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>use shadow DOM</title>
+  </head>
+  <body>
+    <div class="shadow-host">
+
+    </div>
+
+    <template id="template">
+      <style media="screen">
+        :host input {
+          background: red;
+        }
+        :host .labelClass {
+          color: blue;
+        }
+      </style>
+      <form class="" action="index.html" method="post">
+        <label for="nameElement" class="labelClass">xxx</label>
+        <input type="text" id="nameElement" name="" value="xxx" autofocus>
+      </form>
+    </template>
+
+    <script type="text/javascript">
+      /*
+       * 每一个DOM树上的子节点都能有自己的shadow DOM树
+       * 至少拥有一个shaodow DOM子树的DOM元素称为宿主元素，也叫shadow Host
+       * shadow DOM继承自DocumentFragment，根元素为shadow root
+       *
+       */
+      var shadowHost = document.querySelector('.shadow-host'),
+          shadowRoot1 = shadowHost.createShadowRoot(),
+          shadowRoot2 = shadowHost.createShadowRoot(),
+          template = document.querySelector('#template'),
+          templateContent = template.content,
+          templateNodes = document.importNode( templateContent, true );
+
+      shadowRoot1.innerHTML = 'inside shadowRoot1';
+      shadowRoot2.appendChild( templateNodes );
+
+        /*
+         * shadow root 有一些方法与属性：
+         * 方法：
+         * 1、getElementById()  -- HTMLElement
+         * 2、getElementsByTagName() -- NodeList
+         * 3、getElementsByClassName() -- NodeList
+         * 4、getElementsByTagNameNS() -- NodeList
+         * 5、getSelection() -- Selection
+         * 6、elementFromPoint  -- Element 返回对应坐标上的元素
+         * 属性：
+         * 1、activeElement  shadow DOM 当前选中的元素
+         * 2、host 对应宿主元素
+         * 3、olderShadowRoot   如果一个元素有多个shadow tree，则该属性返回最早的一个
+         * 4、innerHTML    返回HTML内容字符串
+         * 5、styleSheets 如果包含style标签，则属性将以对象的形式返回  -- StyleSheetList
+         */
+        console.log( shadowRoot2.host );
+        console.log( shadowHost.olderShadowRoot );
+        console.log( shadowRoot2.innerHTML );
+        console.log( shadowRoot2.styleSheets );
+    </script>
+  </body>
+</html>

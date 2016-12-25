@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>检测shadow DOM的兼容性</title>
+  </head>
+  <body>
+    <h1 class="message"></h1>
+    <script type="text/javascript">
+      /*
+       * 特性检测
+       * 是否支持createShadowRoot
+       */
+      var isShadowDOMSupported = function () {
+        return "createShadowRoot" in document.body;
+      }
+
+      var isSupport = isShadowDOMSupported(),
+          message = document.querySelector('.message');
+
+      if ( isSupport ) {
+        message.innerHTML = 'shadow DOM Is Suppoted';
+      } else {
+        message.innerHTML = 'shadow DOM Is Not Suppoted';
+      }
+
+    </script>
+  </body>
+</html>

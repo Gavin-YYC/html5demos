@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HTML Import 特性检查</title>
+  </head>
+  <body>
+    <h1 id="message"></h1>
+    <script type="text/javascript">
+      /*
+       * HTML Import
+       * 并非所有浏览器都支持HTML Import新特性
+       * 需要通过<link>中的import关键字进行检查
+       *
+       */
+      var isImporSupported = function () {
+        var link = document.createElement('link');
+        return 'import' in link;
+      }
+
+      var isSupported = isImporSupported(),
+          message = document.querySelector('#message');
+
+      if ( isSupported ) {
+        message.innerHTML = 'HTML Import Supported!';
+      } else {
+        message.innerHTML = 'HTML Import Not Supported!';
+      }
+    </script>
+  </body>
+</html>

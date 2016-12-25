@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>使用外部导入的文档</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*
+       * 1、首先使用link标签导入外部文档
+       * 2、获取导入文档的内容
+       * 3、插入到页面节点中
+       * Import有两个时间，load与error
+       *
+       */
+      var externalDocument = document.querySelector('link[rel="import"]').import;
+
+      document.body.appendChild( externalDocument );
+
+      function handleSuc ( e ) {
+        console.log( e );
+      }
+
+      function handleErr ( e ) {
+        console.log( e );
+      }
+    </script>
+    <link rel="import" href="my.html" onload="handleSuc(event)" onerror="handleErr(event)">
+  </body>
+</html>
