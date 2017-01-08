@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>details-2 html5</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        padding: 30px;
+      }
+      details {
+        width: 400px;
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+      details summary {
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        height: 30px;
+        line-height: 30px;
+        background: linear-gradient(#fff, #e1e1e1);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+      details summary:after {
+        content: "+";
+        float: left;
+        width: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5em;
+      }
+      details[open] {
+        background-color: #e1e1e1;
+        border-radius: 5px;
+        box-shadow: 0 3px 3px 0 rgba(0,0,0,.3);
+      }
+      details[open] summary {
+        background: #e1e1e1;
+        border: none;
+      }
+      details[open] summary::after {
+        content: "-";
+      }
+      details p {
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-all;
+        padding: 5px;
+        animation: fadeInDown 0.5s linear;
+      }
+      @keyframes fadeInDown {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <details>
+        <summary>Question 1</summary>
+        <p>answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer</p>
+      </details>
+      <details open>
+        <summary>Question 2</summary>
+        <p>answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer</p>
+      </details>
+      <details>
+        <summary>Question 3</summary>
+        <p>answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer</p>
+      </details>
+      <details>
+        <summary>Question 4</summary>
+        <p>answeransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweransweranswer</p>
+      </details>
+    </section>
+  </body>
+</html>

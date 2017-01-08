@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>html5 - details</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-family: sans-serif;
+      }
+      .file-details {
+        width: 350px;
+        border: 1px solid #b0afb0;
+        background-color: #ececec;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .file-summary {
+        position: relative;
+        padding: 10px;
+      }
+      .file-summary__image {
+        width: 22px;
+        height: 30px;
+        border-top: 1px solid #e2e2e2;
+      }
+      .file-summary__title {
+        display: inline-block;
+        font-weight: bold;
+      }
+      .file-summary__title--time {
+        font-size: 12px;
+        font-weight: normal;
+        color: #464646;
+      }
+      .file-summary__footer {
+        display: inline-block;
+      }
+      .file-summary__editor {
+        border: 1px solid #c5c5c5;
+        width: 100%;
+        height: 36px;
+        color: #c0c0c0;
+        margin-top: 10px;
+        resize: none;
+      }
+      .file-summary__size {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+      }
+
+      .file-common {
+        border-top: 1px solid #c5c5c5;
+        padding: 3px 10px;
+      }
+      .file-common summary {
+        font-size: 14px;
+        outline: none;
+        cursor: pointer;
+        user-select: none;
+      }
+      .file-common summary::-webkit-details-marker {
+        color: #8c8c8c;
+      }
+      .file-common__props {
+        font-size: 13px;
+        margin: 10px 0;
+      }
+      .file-common__props tr {
+        line-height: 1.2;
+      }
+      .file-common__props tr td:nth-child(1) {
+        width: 60px;
+        text-align: right;
+        padding-right: 12px;
+      }
+      .file-common__input {
+        width: 100%;
+        height: 20px;
+        margin: 10px 0;
+        border: 1px solid #c5c5c5;
+      }
+      .file-common__textarea {
+        width: 100%;
+        resize: none;
+        height: 36px;
+        border: 1px solid #c5c5c5;
+        margin: 10px 0;
+      }
+      .file-common__image {
+        margin: 10px 0;
+        width: 100%;
+      }
+      .file-common__select {
+        margin: 10px 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="file-details">
+      <section class="file-summary">
+        <figure>
+          <img src="summary.png" alt="" class="file-summary__image">
+          <figcaption class="file-summary__title">
+            HTTP权威指南.pdf
+            <br>
+            <span class="file-summary__title--time">
+              修改时间: <time datetime="2013-07-17T11:37">2013年7月17日 星期三 11:37</time>
+            </span>
+          </figcaption>
+        </figure>
+        <textarea name="name" class="file-summary__editor">添加编辑…</textarea>
+        <span class="file-summary__size">121.8MB</span>
+      </section>
+      <details open class="file-common">
+        <summary>通用: </summary>
+        <table class="file-common__props">
+          <tr>
+            <td>种类: </td>
+            <td>便携文稿格式 (PDF)</td>
+          </tr>
+          <tr>
+            <td>大小: </td>
+            <td>121,765,394 字节（磁盘上的 121.8 MB）</td>
+          </tr>
+          <tr>
+            <td>位置: </td>
+            <td>/Users/yangyoucun/Desktop</td>
+          </tr>
+          <tr>
+            <td>创建时间: </td>
+            <td>2013年7月17日 星期三 11:37</td>
+          </tr>
+          <tr>
+            <td>修改时间: </td>
+            <td>2013年7月17日 星期三 11:37</td>
+          </tr>
+        </table>
+      </details>
+      <details class="file-common">
+        <summary>更多信息: </summary>
+        <table class="file-common__props">
+          <tr>
+            <td>版本: </td>
+            <td>1.5</td>
+          </tr>
+          <tr>
+            <td>页数: </td>
+            <td>722</td>
+          </tr>
+          <tr>
+            <td>分辨率: </td>
+            <td>631 × 835</td>
+          </tr>
+          <tr>
+            <td>安全性: </td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>编码软件: </td>
+            <td>FreePic2Pdf - 1.26</td>
+          </tr>
+          <tr>
+            <td>来源: </td>
+            <td>jiu的MacBook Pro</td>
+          </tr>
+        </table>
+      </details>
+      <details class="file-common">
+        <summary>名称与拓展名: </summary>
+        <input type="text" class="file-common__input" name="" value="HTTP权威指南.pdf">
+      </details>
+      <details class="file-common">
+        <summary>注释: </summary>
+        <textarea name="name" class="file-common__textarea"></textarea>
+      </details>
+      <details class="file-common">
+        <summary>打开方式: </summary>
+        <select class="file-common__select">
+          <option value="">预览（默认）</option>
+        </select>
+      </details>
+      <details class="file-common" open>
+        <summary>预览: </summary>
+        <img src="temp.png" alt="" class="file-common__image">
+      </details>
+    </article>
+  </body>
+</html>

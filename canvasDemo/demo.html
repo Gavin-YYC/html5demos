@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>canvas</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script type="text/javascript">
+    window.addEventListener('load', eventWindowLoaded, false);
+
+    var canvas;
+
+    function eventWindowLoaded () {
+      canvasApp();
+    }
+
+    function canvasSupport () {
+      canvas = document.getElementById('canvas');
+      return 'getContext' in canvas;
+    }
+
+    function canvasApp () {
+      if ( canvasSupport() ) {
+        var context = canvas.getContext('2d');
+
+        function drawScreen () {
+          // 背景
+          context.globalAlpha = 1;
+          context.fillStyle = '#000000';
+          context.fillRect( 0, 0, 640, 480 );
+
+          // 图像
+          context.globalAlpha = .25;
+          context.drawImage( helloWorldImage, 0, 0 );
+
+          if ( fadeIn ) {
+            alpha += .01;
+            if ( alpha >= 1 ) {
+              alpha = 1;
+              fadeIn = false;
+            }
+          } else {
+            alpha -= .01;
+            if ( alpha < 0 ) {
+              alpha = 0;
+              fadeIn = true;
+            }
+          }
+
+          // text
+          context.font = '72px Sans-Serif';
+          context.textBaseline = 'top';
+
+          context.globalAlpha = alpha;
+          context.fillStyle = '#ffffff';
+          context.fillText( text, 150, 200 );
+        }
+
+        function gameLoop () {
+          window.setTimeout( gameLoop, 20 );
+          drawScreen();
+        }
+
+        var text = 'Hello World';
+        var alpha = 0;
+        var fadeIn = true;
+        var helloWorldImage = new Image();
+        helloWorldImage.src = 'http://sandbox.runjs.cn/uploads/rs/209/dartys33/test4.jpg';
+
+        gameLoop();
+      } else {}
+    }
+    </script>
+  </body>
+</html>
