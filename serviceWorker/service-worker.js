@@ -1,10 +1,10 @@
 // 缓存名称
-const cacheName = 'MyPWA-version-1';
+const cacheName = 'MyPWA-version-4';
 // 需要缓存的文件
 const fileToCache = [
   '/css/style.css',
   '/',
-  'about.html'
+  '/about.html'
 ];
 
 
@@ -43,4 +43,25 @@ self.addEventListener('fetch', e => {
       console.log( err );
     })
   )
+});
+
+
+
+/*
+ * 清楚缓存
+ *
+ */
+self.addEventListener('activate', e => {
+    const cacheWhiteList = ['MyPWA-version-5']
+    e.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if ( cacheWhiteList.indexOf(cachename) === -1 ) {
+                        return caches.delete( cacheName )
+                    }
+                })
+            ) 
+        })
+    ) 
 });
