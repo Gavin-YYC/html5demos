@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>start canvas</title>
+    <style media="screen">
+      #canvas {
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
+    var ctx;
+
+    // 检查浏览器是否支持
+    if ( canvas.getContext ) {
+      ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgba(200, 0, 0, 1)';
+      ctx.fillRect(10, 10, 55, 50);
+
+      // 绘制矩形
+      ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+      ctx.fillRect(30, 30, 55, 50);
+      ctx.strokeRect(50, 50, 80, 80);
+      ctx.clearRect(30, 50, 20, 20);
+
+      // 绘制路径
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(120, 120);
+      ctx.lineTo(80, 120);
+      ctx.fill();
+
+      // 绘制笑脸
+      ctx.beginPath();
+      ctx.arc(200, 200, 50, 0, Math.PI * 2, true); // true 表示逆时针
+      ctx.moveTo(200, 200);
+      ctx.arc(200, 200, 35, 0, Math.PI, false);    // false 表示顺时针
+      ctx.moveTo(180, 180);
+      ctx.arc(180, 180, 5, 0, Math.PI * 2, true);
+      ctx.moveTo(220, 180);
+      ctx.arc(220, 180, 5, 0, Math.PI * 2, true);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    </script>
+  </body>
+</html>

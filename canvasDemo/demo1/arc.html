@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>arc demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.arc(100, 100, 50, 0, Math.PI);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(100, 100, 60, Math.PI / 3, Math.PI * 4/3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(100, 100, 70, 0, Math.PI * 5/3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(100, 100, 80, -Math.PI / 6, Math.PI * 2);
+    ctx.stroke();
+    </script>
+  </body>
+</html>
