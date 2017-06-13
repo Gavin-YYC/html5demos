@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>style demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = 'orange';
+      ctx.fillRect(10, 10, 50, 50);
+
+      ctx.strokeStyle = 'blue';
+      ctx.fillRect(50, 50, 100, 100);
+
+      for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < 6; j++) {
+          ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ',' + Math.floor(255 - 42.5 * j) + ', 0)';
+          ctx.fillRect(j * 25, i * 25, 25, 25);
+        }
+      }
+
+      ctx.fillStyle = '#FD0';
+      ctx.fillRect(100, 100, 75, 75);
+      ctx.fillStyle = '#6C0';
+      ctx.fillRect(175, 100, 75, 75);
+      ctx.fillStyle = '#09F';
+      ctx.fillRect(100, 175, 75, 75);
+      ctx.fillStyle = '#F30';
+      ctx.fillRect(175, 175, 75, 75);
+      ctx.fillStyle = '#FFF';
+
+      // 全局透明度
+      // 也可以使用rgba()来设置透明度，推荐用次方式
+      ctx.globalAlpha = '0.2';
+      // 画半透明圆
+      for (var i = 0; i < 7; i++) {
+        ctx.beginPath();
+        ctx.arc(175, 175, 10 + 10 * i, 0, Math.PI * 2, true);
+        ctx.fill();
+      }
+    </script>
+  </body>
+</html>
