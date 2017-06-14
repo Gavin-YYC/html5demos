@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>line style demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+    <canvas id="lineJoin" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector("#canvas");
+      var lineJoinCanvas = document.querySelector('#lineJoin');
+      var lCtx = lineJoinCanvas.getContext('2d');
+
+      var ctx = canvas.getContext('2d');
+      var lineCaps = ['butt', 'round', 'square'];
+      // 创建路径
+      ctx.strokeStyle = '#09f';
+      ctx.beginPath();
+      ctx.moveTo(20, 50);
+      ctx.lineTo(180, 50);
+      ctx.moveTo(20, 200);
+      ctx.lineTo(180, 200);
+      ctx.stroke();
+
+      // 画线条
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 10;
+      lineCaps.forEach(function ( cap, index ) {
+        ctx.lineCap = cap;
+        ctx.beginPath();
+        ctx.moveTo(50 + 50 * index, 50);
+        ctx.lineTo(50 + 50 * index, 200);
+        ctx.stroke();
+      });
+
+      ctx.lineWidth = 10;
+      ctx.lineJoin = 'miter';
+      ctx.miterLimit = 6;
+      ctx.beginPath();
+      ctx.moveTo(300, 100);
+      ctx.lineTo(310, 150);
+      ctx.lineTo(320, 50);
+      ctx.lineTo(330, 150);
+      ctx.lineTo(340, 50);
+      ctx.lineTo(350, 150);
+      ctx.lineTo(360, 50);
+      ctx.stroke();
+
+      // lineJoin
+      var lineJoins = ['round', 'bevel', 'miter'];
+      lCtx.lineWidth = 10;
+      lineJoins.forEach(function ( joinType, i ) {
+        lCtx.lineJoin = joinType;
+        lCtx.beginPath();
+        lCtx.moveTo(-5, 5 + i * 40);
+        lCtx.lineTo(35, 45 + i * 40);
+        lCtx.lineTo(75,5+i*40);
+        lCtx.lineTo(115,45+i*40);
+        lCtx.lineTo(155,5+i*40);
+        lCtx.stroke();
+      });
+    </script>
+  </body>
+</html>
