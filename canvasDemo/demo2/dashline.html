@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dashline demo</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .control-wrap {
+        width: 250px;
+        border: 1px dashed #ccc;
+        padding: 10px;
+      }
+      .control__label {
+        display: block;
+      }
+      .control__title {
+        display: inline-block;
+        width: 60px;
+        text-align: right;
+      }
+      .control__input {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      p {
+        width: 300px;
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="control-wrap">
+      <form>
+        <label class="control__label">
+          <span class="control__title">虚线: </span>
+          <input type="range" name="value" value="" class="control__input" min="0" max="10">
+          <output name="result" class="control__result"></output>
+        </label>
+        <label class="control__label">
+          <span class="control__title">偏移量: </span>
+          <input type="range" name="offset" value="" class="control__input" min="-10" max="10">
+          <output name="result" class="control__result"></output>
+        </label>
+      </form>
+    </div>
+    <p>蚂行军</p>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canavs = document.querySelector("#canvas");
+      var control = document.querySelector(".control-wrap");
+      var ctx = canvas.getContext('2d');
+      var value = 1, offset = 1;
+
+
+      ctx.lineWidth = 10;
+
+      control.addEventListener('change', function ( e ) {
+        var el = e.target;
+        var value = el.value;
+        var name = el.name;
+        el.nextElementSibling.value = value;
+        window[ name ] = value;
+        render();
+      });
+
+      function render () {
+        ctx.clearRect(0, 0, 300, 300);
+        ctx.setLineDash([value, 2]);
+        ctx.lineDashOffset = offset ;
+        ctx.beginPath();
+        ctx.moveTo(50, 50);
+        ctx.lineTo(50, 200);
+        ctx.stroke();
+      }
+
+      render();
+
+
+
+      ctx.lineWidth = 1;
+      function draw () {
+        ctx.clearRect(90, 50, 120, 120);
+        ctx.setLineDash([4, 2]);
+        ctx.lineDashOffset = -offset;
+        ctx.strokeRect( 100, 60, 100, 100);
+      }
+
+      function march () {
+        offset++;
+        if ( offset > 16 ) {
+          offset = 0;
+        }
+        draw();
+        setTimeout( march, 30 );
+      }
+
+      march();
+
+    </script>
+  </body>
+</html>

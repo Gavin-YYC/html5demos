@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>gradient demo</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+
+      var linearGradient = ctx.createLinearGradient(0,0,150,150);
+
+      // var radialGradient = ctx.createRadialGradient();
+
+      linearGradient.addColorStop(0, 'white');
+      linearGradient.addColorStop(1, 'black');
+      ctx.fillStyle = linearGradient;
+      ctx.fillRect(0,0,150,150);
+    </script>
+  </body>
+</html>

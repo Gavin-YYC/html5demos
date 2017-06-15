@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>shadow demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 2;
+      ctx.shadowBlur = 2;
+      ctx.shadowColor = 'rgba(0, 0, 0, .3)';
+      ctx.font = '50px Times New Roman';
+      ctx.fillStyle = 'Black';
+      ctx.fillText('哈喽啊', 5, 30);
+    </script>
+  </body>
+</html>
