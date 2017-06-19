@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>text demo</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+
+      canvas.width = document.body.clientWidth;
+      canvas.height = document.body.clientHeight;
+
+      /*
+       * 绘制文本
+       * 1、文本填充
+       * fillText(text, x, y [, maxWidth]);
+       * 2、文本描边
+       * strokeText(text, x, y [, maxWidth]);
+       */
+      ctx.font = '48px serif';
+      ctx.fillText('hello world', 50, 50);
+      ctx.strokeText('Yang Youcun', 0, 100);
+
+      /*
+       * 设置文本样式
+       * ctx.font = value;          // 字体，默认 10px sans-serif
+       * ctx.textAlign = value;     // 文本对齐，start, end, left, rigth, center，默认start
+       * ctx.textBaseLine = value;  // 基线对齐, top, hanging, middle, alphabetic, ideographic, bottom, 默认是alphabetic
+       * ctx.direction = value;     // 文本方向，ltr, rtl, inherit, 默认是inherit
+       */
+      ctx.font = '48px sefif';
+      ctx.textBaseLine = 'top';
+      ctx.direction = 'rtl';
+      ctx.textAlign = 'start';
+      ctx.fillText('abd123好的撒3ds32', 50, 150);
+
+      /*
+       * 文本测量
+       * ctx.measureText();
+       */
+      console.log( ctx.measureText('hello') );
+    </script>
+  </body>
+</html>

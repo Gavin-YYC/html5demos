@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>image demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      /*
+       * canvas的图片源
+       * HTMLImageElement
+       * HTMLVideoElement
+       * HTMLCanvasElement
+       * ImageBitMap
+       */
+
+      /*
+       * 图片绘制
+       * drawImage(image, x, y)
+       * drawImage(image, x, y, width, height); // 缩放
+       * drawImage(image, x1, y1, sWidth, sHeight, dx, dy, dWidth, dHeight);  // 切片
+       * width: 图像宽度
+       * height: 图像高度
+       * 具有width与height参数，图片会拉伸或压缩
+       */
+
+      // 由HTMLImageElement生成图片
+      var img = new Image();
+      img.onload = function () {
+        ctx.drawImage( img, 10, 10 );
+        ctx.drawImage( img, 10, 10, 500, 300 );
+        ctx.drawImage( img, 600, 400, 100, 100, 0, 300, 300, 300 );
+      }
+      img.src = './timg.jpeg'
+    </script>
+  </body>
+</html>
