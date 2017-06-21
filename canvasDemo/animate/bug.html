@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>cicle animate demo</title>
+    <style media="screen">
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canavs = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+      var x, y, radius, dx, dy, r, g, b;
+      var winWidth = window.innerWidth;
+      var winHeight = window.innerHeight;
+      canvas.width = winWidth;
+      canvas.height = winHeight;
+
+      function Circle ( x, y, dx, dy, radius ) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.radius = radius;
+      }
+
+      Circle.prototype.draw = function () {
+        ctx.strokeStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+        ctx.stroke();
+      }
+
+      Circle.prototype.update = function ( winWidth, winHeight ) {
+        if ((this.x + this.radius > winWidth) || (this.x - this.radius < 0)) {
+          this.dx = -this.dx;
+        }
+        if ((this.y + this.radius > winHeight) || (this.y - this.radius < 0)) {
+          this.dy = -this.dy;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+      }
+
+      var circleArray = [];
+      for (var i = 0; i < 100; i++) {
+        x = Math.round(Math.random() * winWidth);
+        y = Math.round(Math.random() * winHeight);
+        dx = Math.random() * 9 + 1;
+        dy = Math.random() * 9 + 1;
+        radius = 30;
+        circleArray.push(new Circle(x, y, dx, dy, radius));
+      }
+
+      function animate () {
+        ctx.clearRect(0, 0, winWidth, winHeight);
+        for (i = 0; i < circleArray.length; i++) {
+          circleArray[i].update(winWidth, winHeight);
+        }
+        window.requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
+</html>
