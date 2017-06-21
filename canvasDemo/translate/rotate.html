@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>rotate demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <div class="">
+      <form class="">
+        <input type="range" min=-100 max=180>
+      </form>
+    </div>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+      var input = document.querySelector('input');
+
+      function draw ( v ) {
+        ctx.clearRect(0, 0, 300, 300);
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, 300, 300);
+
+        ctx.save();
+        ctx.strokeStyle = 'white';
+        ctx.translate(150, 150);
+        ctx.strokeRect(0, 0, 150, 150);
+
+        ctx.save();
+        ctx.strokeStyle = 'white';
+        ctx.rotate(2*Math.PI/v);
+        ctx.strokeRect(0, 0, 150, 150);
+        ctx.restore();
+        ctx.restore();
+      }
+
+      input.addEventListener('change', function ( e ) {
+        draw( e.target.value );
+      })
+    </script>
+  </body>
+</html>
