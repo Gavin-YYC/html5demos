@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ball demo</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+      var winWidth = window.innerWidth;
+      var winHeight = window.innerHeight;
+      var raf;
+      var running = false;
+      canvas.width = winWidth;
+      canvas.height = winHeight;
+
+
+      var ball = {
+        x: 100,
+        y: 100,
+        vx: 5,
+        vy: 2,
+        radius: 25,
+        color: 'blue',
+        draw: function () {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+          ctx.closePath();
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        },
+        update: function () {
+          if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+            this.vx = -this.vx;
+          }
+          if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+            this.vy = -this.vy;
+          }
+          this.draw();
+        }
+      }
+
+      function clear () {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function draw () {
+        clear();
+        ball.update();
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+        raf = window.requestAnimationFrame(draw);
+      }
+
+      canvas.addEventListener('click', function ( e ) {
+        if ( !running ) {
+          raf = requestAnimationFrame(draw);
+          running = true;
+        }
+      });
+
+      canvas.addEventListener('mousemove', function ( e ) {
+        if ( !running ) {
+          clear();
+          ball.x = e.clientX;
+          ball.y = e.clientY;
+          ball.draw();
+        }
+      })
+    </script>
+  </body>
+</html>
