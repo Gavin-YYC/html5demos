@@ -3,15 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>image demo</title>
+    <style media="screen">
+      body {
+        margin: 0;
+        padding: 0;
+        transition: all 0.1s ease;
+      }
+      button {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <canvas id="canvas" width="300" height="300"></canvas>
+    <button type="button" name="button">下载</button>
     <script type="text/javascript">
       var canvas = document.querySelector('#canvas');
+      var button = document.querySelector('button');
       var ctx = canvas.getContext('2d');
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = 400;
 
       /*
        * canvas的图片源
@@ -34,11 +45,36 @@
       // 由HTMLImageElement生成图片
       var img = new Image();
       img.onload = function () {
-        ctx.drawImage( img, 10, 10 );
-        ctx.drawImage( img, 10, 10, 500, 300 );
-        ctx.drawImage( img, 600, 400, 100, 100, 0, 300, 300, 300 );
+        ctx.drawImage( img, 10, 10, 300, 200 );
       }
-      img.src = './timg.jpeg'
+      img.src = './timg.jpeg';
+
+      // 放大镜 + 颜色选择器
+      function draw ( x, y, rgba ) {
+        ctx.clearRect(310, 10, 100, 100);
+        ctx.fillStyle = rgba;
+        ctx.fillRect(310, 10, 100, 100);
+        ctx.drawImage( canvas, x-10, y-10, 20, 20, 310, 110, 100, 100 );
+      }
+
+      canvas.addEventListener('mousemove', function ( e ) {
+        var x = e.clientX;
+        var y = e.clientY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        var data = pixel.data;
+        var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + data[3] + ')';
+        draw( x, y, rgba );
+      });
+
+      // 下载图像
+      button.addEventListener('click', function ( e ) {
+        var dataURL = canvas.toDataURL('image/jepg', 0.3);
+        var img = document.createElement('img');
+        img.width = 500;
+        img.height= 300;
+        img.src = dataURL;
+        document.body.appendChild( img );
+      })
     </script>
   </body>
 </html>
