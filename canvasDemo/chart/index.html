@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chart demo</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <p>参考：https://codepen.io/kvasilov48/pen/ZYRPOm?editors=0010</p>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <script type="text/javascript">
+      var canvas = document.querySelector('#canvas');
+      var ctx = canvas.getContext('2d');
+      var winWidth = window.innerWidth;
+      var winHeight = window.innerHeight;
+      canvas.width = winWidth;
+      canvas.height = winHeight;
+
+      var data = [
+        {
+          name: '测试1',
+          value: 10
+        }, {
+          name: '测试2',
+          value: 20
+        }, {
+          name: '测试3',
+          value: 30
+        }, {
+          name: '测试4',
+          value: 25
+        }, {
+          name: '测试4',
+          value: 10
+        }, {
+          name: '测试4',
+          value: 5
+        }
+      ];
+
+      function randomColor () {
+        return 'rgb(' +
+          Math.floor(Math.random() * 255) + ',' +
+          Math.floor(Math.random() * 255) + ',' +
+          Math.floor(Math.random() * 255) + ')';
+      }
+
+      var canvasCentenX = 300;
+      var canvasCentenY = 300;
+      var canvasRadius = 200;
+
+      function draw () {
+        var lastAngel = -Math.PI / 2;
+        for ( var i = 0, len = data.length; i < len; i++ ) {
+          var slice = data[i];
+          var value = slice.value;
+          var startAngle = lastAngel;
+          var angel = Math.PI * 2 * (value / 100);
+          lastAngel = startAngle + angel;
+          ctx.beginPath();
+          ctx.fillStyle = randomColor();
+          ctx.moveTo(canvasCentenX, canvasCentenY);
+          ctx.arc(canvasCentenX, canvasCentenY, canvasRadius, startAngle, lastAngel, false);
+          ctx.fill();
+        }
+      }
+
+      canvas.addEventListener('mousemove', function ( e ) {
+        var x = e.pageX;
+        var y = e.pageY;
+        var xFromCentre = x - canvasCentenX;
+        var yFromCentre = y - canvasCentenY;
+        // 计算鼠标当前点距离饼状图中心的距离，如果在距离内，说明鼠标在饼状图上
+        var distanceToCenter = Math.sqrt(Math.pow(xFromCentre, 2) + Math.pow(yFromCentre, 2));
+        if ( distanceToCenter <= canvasRadius ) {
+          // 计算点击的角度，确定命中哪个扇区
+          var clickAngle = Math.atan2(yFromCentre, xFromCentre);
+          if ( clickAngle < 0 ) {
+            clickAngle = 2 * Math.PI + clickAngle;
+          }
+          // 确定扇区
+
+        }
+      })
+
+      draw();
+    </script>
+  </body>
+</html>
