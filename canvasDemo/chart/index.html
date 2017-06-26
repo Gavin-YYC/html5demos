@@ -8,88 +8,107 @@
         margin: 0;
         padding: 0;
       }
+      #canvas {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <p>瀑布流：https://codepen.io/jackrugile/pen/Knawg?editors=0010</p>
-    <p>饼状图：https://codepen.io/kvasilov48/pen/ZYRPOm?editors=0010</p>
-    <canvas id="canvas" width="300" height="300"></canvas>
+    <script src="https://cdn.bootcss.com/zepto/1.1.3/zepto.min.js" charset="utf-8"></script>
+    <script src="./data.js" charset="utf-8"></script>
     <script type="text/javascript">
-      var canvas = document.querySelector('#canvas');
-      var ctx = canvas.getContext('2d');
-      var winWidth = window.innerWidth;
-      var winHeight = window.innerHeight;
-      canvas.width = winWidth;
-      canvas.height = winHeight;
-
-      var data = [
-        {
-          name: '测试1',
-          value: 10
-        }, {
-          name: '测试2',
-          value: 20
-        }, {
-          name: '测试3',
-          value: 30
-        }, {
-          name: '测试4',
-          value: 25
-        }, {
-          name: '测试4',
-          value: 10
-        }, {
-          name: '测试4',
-          value: 5
-        }
-      ];
-
-      function randomColor () {
-        return 'rgb(' +
-          Math.floor(Math.random() * 255) + ',' +
-          Math.floor(Math.random() * 255) + ',' +
-          Math.floor(Math.random() * 255) + ')';
-      }
-
-      var canvasCentenX = 300;
-      var canvasCentenY = 300;
-      var canvasRadius = 200;
-
-      function draw () {
-        var lastAngel = -Math.PI / 2;
-        for ( var i = 0, len = data.length; i < len; i++ ) {
-          var slice = data[i];
-          var value = slice.value;
-          var startAngle = lastAngel;
-          var angel = Math.PI * 2 * (value / 100);
-          lastAngel = startAngle + angel;
-          ctx.beginPath();
-          ctx.fillStyle = randomColor();
-          ctx.moveTo(canvasCentenX, canvasCentenY);
-          ctx.arc(canvasCentenX, canvasCentenY, canvasRadius, startAngle, lastAngel, false);
-          ctx.fill();
+      var options = window.options;
+      var titleDefault = {
+        show: true,
+        text: '',
+        subtext: '',
+        padding: 5,
+        textStyle: {
+          color: '#333',
+          fontStyle: 'normal',
+          fontWeight: 'bolder',
+          fontFamily: 'sans-serif',
+          fontSize: 18
+        },
+        subtextStyle: {
+          color: '#aaa',
+          fontStyle: 'normal',
+          fontWeight: 'normal',
+          fontFamily: 'sans-serif',
+          fontSize: 12
         }
       }
 
-      canvas.addEventListener('mousemove', function ( e ) {
-        var x = e.pageX;
-        var y = e.pageY;
-        var xFromCentre = x - canvasCentenX;
-        var yFromCentre = y - canvasCentenY;
-        // 计算鼠标当前点距离饼状图中心的距离，如果在距离内，说明鼠标在饼状图上
-        var distanceToCenter = Math.sqrt(Math.pow(xFromCentre, 2) + Math.pow(yFromCentre, 2));
-        if ( distanceToCenter <= canvasRadius ) {
-          // 计算点击的角度，确定命中哪个扇区
-          var clickAngle = Math.atan2(yFromCentre, xFromCentre);
-          if ( clickAngle < 0 ) {
-            clickAngle = 2 * Math.PI + clickAngle;
-          }
-          // 确定扇区
+      function PieChart ( cls ) {
+        this.canvasWidth = 500;
+        this.canvasHeight = 400;
+        this.canvasCentenX = this.canvasWidth / 2;
+        this.canvasCentenY = this.canvasHeight / 2;
+        this.canvasRadius = 100;
+        this.drawData = [];
+        this.chartStartAngle = - Math.PI / 2;
+        this.currentPullOutSlice = -1;
+        this.currentPullOutDistance = 10;
+        this.pullOutMaxDistance = 10;
+        this.pullOutLabelPadding = 25;
+        this.pullOutFrameInterval = 40;
+        this.pullOutFrameStep = 4;
+        this.animationId = null;
+        this.toolTip = null;
+        this.createElement( cls );
+      }
 
+      PieChart.prototype.createElement = function ( cls ) {
+        var $container = $( cls );
+        var $canvas = $('<canvas>');
+        var $toolTip = $('<div>');
+        var offset;
+        if ( !$container.length ) {
+          $container = $('<div>');
+          $container.addClass( cls.trim().split(/[\.#]/)[1] );
+          $(document.body).append( $container );
+        } else {
+          offset = $container.offset();
+          this.canvasWidth = offset.width;
+          this.canvasHeight = offset.height;
         }
-      })
+        $canvas.css({width: this.canvasWidth, height: this.canvasHeight});
+        $toolTip.css({position: 'fixed', display: 'none'});
+        $container.append( $canvas, $toolTip );
+        this.ctx = $canvas[0].getContext('2d');
+      }
 
-      draw();
+      PieChart.prototype.setOptions = function ( options ) {
+        this.options = options;
+        this.drawTitle();
+        this.drawLegend();
+      }
+
+      PieChart.prototype.drawTitle = function () {
+        var title = $.extend(true, {}, titleDefault, this.options.title);
+        if ( title.show ) {
+          var textWidth, subtextWidth;
+          this.ctx.save();
+          this.ctx.textAlign = 'center';
+          this.ctx.textBaseline = 'top';
+          this.ctx.font = title.textStyle.fontStyle + ' ' + title.textStyle.fontWeight + ' ' + title.textStyle.fontSize + 'px ' + title.textStyle.fontFamily;
+          this.ctx.fillStyle = title.textStyle.color;
+          this.ctx.fillText(title.text, this.canvasCentenX, title.padding);
+          this.ctx.font = title.subtextStyle.fontStyle + ' ' + title.subtextStyle.fontWeight + ' ' + title.subtextStyle.fontSize + 'px ' + title.subtextStyle.fontFamily;
+          this.ctx.fillStyle = title.subtextStyle.color;
+          this.ctx.fillText(title.subtext, this.canvasCentenX, title.padding + title.textStyle.fontSize);
+          this.ctx.restore();
+        }
+      }
+
+      PieChart.prototype.drawLegend = function () {
+        var legend = this.options.legend;
+      }
+
+
+      // 项目初始化
+      var pieChart = new PieChart('.chart-pie');
+      pieChart.setOptions( options );
     </script>
   </body>
 </html>

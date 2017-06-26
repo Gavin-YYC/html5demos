@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chart demo</title>
+    <style media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
+    var winWidth = window.innerWidth;
+    var winHeight = window.innerHeight;
+    var drawData = [];
+    var canvasMinWidth = 500;
+    var canvasMinHeight = 400;
+    var canvasCentenX = canvasMinWidth / 2;
+    var canvasCentenY = canvasMinHeight / 2;
+    var canvasRadius = 100;
+    var drawData = [];
+    var chartStartAngle = - Math.PI / 2;
+    var currentPullOutSlice = -1;
+    var currentPullOutDistance = 10;
+    var pullOutMaxDistance = 10;
+    var pullOutLabelPadding = 25;
+    var pullOutFrameInterval = 40;
+    var pullOutFrameStep = 4;
+    var animationId = null;
+    var toolTip = null;
+
+    canvas.width = winWidth;
+    canvas.height = winHeight;
+
+    var data = [{
+      label: '小米',
+      value: 10,
+      bgColor: '#0DA068'
+    }, {
+      label: '华为',
+      value: 20,
+      status: 'out',
+      bgColor: '#194E9C'
+    }, {
+      label: '苹果',
+      value: 30,
+      bgColor: '#ED9C13'
+    }, {
+      label: '三星',
+      value: 25,
+      bgColor: '#ED5713'
+    }, {
+      label: '魅族',
+      value: 10,
+      bgColor: '#057249'
+    }, {
+      label: '锤子',
+      value: 5,
+      bgColor: '#5F91DC'
+    }];
+
+
+    function init () {
+      var endAngle = 0;
+      for ( var i = 0, len = data.length; i < len; i++ ) {
+        var slice = data[i];
+        var value = slice.value;
+        var startAngle = endAngle;
+        var angel = Math.PI * 2 * (value / 100);
+        endAngle = startAngle + angel;
+        if ( endAngle > 2 * Math.PI ) endAngle = endAngle - 2 * Math.PI;
+        if ( slice.status === 'out' ) currentPullOutSlice = i;
+        drawData[i] = {
+          startAngle: startAngle,
+          endAngle: endAngle
+        }
+      }
+      // 创建toolTip
+      toolTip = document.createElement('div');
+      document.body.appendChild( toolTip );
+    }
+
+    function drawChart () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for ( var i = 0, len = drawData.length; i < len; i++ ) {
+        drawLabel( i );
+        drawSlice( i );
+      }
+    }
+
+    function drawSlice ( index ) {
+      var midAngle, textX, textY;
+      var slice = drawData[index];
+      var dataSlice = data[index];
+      var startAngle = slice.startAngle + chartStartAngle;
+      var endAngle = slice.endAngle + chartStartAngle;
+      if ( index === currentPullOutSlice ) {
+        midAngle = (startAngle + endAngle) / 2;
+        startX = canvasCentenX + Math.cos(midAngle) * currentPullOutDistance;
+        startY = canvasCentenY + Math.sin(midAngle) * currentPullOutDistance;
+        ctx.font = '20px serif'
+        ctx.textAlign = 'center';
+        textX = startX + Math.cos(midAngle) * (canvasRadius + pullOutMaxDistance + pullOutLabelPadding);
+        textY = startY + Math.sin(midAngle) * (canvasRadius + pullOutMaxDistance + pullOutLabelPadding);
+        ctx.fillText(dataSlice.label, textX, textY);
+        ctx.font = '16px serif';
+        ctx.fillText(dataSlice.value, textX, textY + 20);
+        // 绘制文字
+      } else {
+        startX = canvasCentenX;
+        startY = canvasCentenY;
+      }
+      ctx.beginPath();
+      ctx.fillStyle = dataSlice.bgColor;
+      ctx.moveTo(startX, startY);
+      ctx.arc(startX, startY, canvasRadius, startAngle, endAngle, false);
+      ctx.lineTo(startX, startY);
+      ctx.fill();
+    }
+
+    function toggleSlice ( index ) {
+      if ( index === currentPullOutSlice ) {
+        currentPullOutSlice = -1;
+        drawChart();
+      } else {
+        startPullOut( index );
+      }
+    }
+
+    function startPullOut ( index ) {
+      if ( index === currentPullOutSlice ) {
+        return;
+      }
+      currentPullOutSlice = index;
+      currentPullOutDistance = 0;
+      clearInterval( animationId );
+      animationId = setInterval(function () {
+        animatePullOut( index );
+      }, pullOutFrameInterval);
+    }
+
+    function animatePullOut ( index ) {
+      currentPullOutDistance += pullOutFrameStep;
+      if ( currentPullOutDistance >= pullOutMaxDistance ) {
+        clearInterval( animationId );
+        return;
+      }
+      drawChart();
+    }
+
+    function getTargetSlice ( event ) {
+      var x = event.pageX - this.offsetLeft;
+      var y = event.pageY - this.offsetTop;
+      var xFromCentre = x - canvasCentenX;
+      var yFromCentre = y - canvasCentenY;
+      var slice;
+      // 计算鼠标当前点距离饼状图中心的距离，如果在距离内，说明鼠标在饼状图上
+      var distanceToCenter = Math.sqrt(Math.pow(xFromCentre, 2) + Math.pow(yFromCentre, 2));
+      if ( distanceToCenter <= canvasRadius ) {
+        // 计算点击的角度，确定命中哪个扇区
+        // 点击位置修正
+        var clickAngle = Math.atan2(yFromCentre, xFromCentre) - chartStartAngle;
+        if ( clickAngle < 0 ) {
+          clickAngle = 2 * Math.PI + clickAngle;
+        }
+        // 确定扇区
+        for (var i = 0, len = drawData.length; i < len; i++) {
+          slice = drawData[i];
+          if ( clickAngle >= slice.startAngle && clickAngle <= slice.endAngle ) {
+            return i;
+          }
+        }
+      } else {
+        return -1;
+      }
+    }
+
+    function drawLabel (index ) {
+      var slice = data[index];
+      var x = 8;
+      var y = 8 + index * 20;
+      var labelX = 55;
+      var labelY = 19 + index * 20;
+      ctx.fillStyle = slice.bgColor;
+      _drawRoundRect(x, y, 30, 15, 5);
+      ctx.font = '10px serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(slice.label, labelX, labelY);
+    }
+
+    function _drawRoundRect( x, y, width, height, radius ) {
+      ctx.beginPath();
+      ctx.moveTo(x, y + radius);
+      ctx.lineTo(x, y + height - radius);
+      ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+      ctx.lineTo(x + width - radius, y + height);
+      ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+      ctx.lineTo(x + width, y + radius);
+      ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+      ctx.lineTo(x + radius, y);
+      ctx.quadraticCurveTo(x, y, x, y + radius);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function showTooltips ( event, slice ) {
+      var dataSlice,
+          labelWidth,
+          valueWidth,
+          maxWidth;
+      var x = event.pageX - this.offsetLeft;
+      var y = event.pageY - this.offsetTop;
+      if ( slice >= 0 ) {
+        dataSlice = data[slice];
+        toolTip.style.textAlign = 'center';
+        toolTip.style.display = 'block';
+        toolTip.style.position = 'fixed';
+        toolTip.style.top = y + 30 + 'px';
+        toolTip.style.left = x + 30 + 'px';
+        toolTip.style.padding = '10px';
+        toolTip.style.color = '#fff';
+        toolTip.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        toolTip.style.borderRadius = '10px';
+        toolTip.style.userSelect = 'none';
+        toolTip.innerHTML = dataSlice.label + '<br>' + dataSlice.value;
+      } else {
+        toolTip.style.display = 'none';
+      }
+    }
+
+    function bindEvent () {
+      canvas.addEventListener('click', function ( e ) {
+        var index = getTargetSlice.call( this, e );
+        if ( index !== -1 ) {
+          toggleSlice( getTargetSlice.call( this, e ) );
+        }
+      });
+      canvas.addEventListener('mousemove', function ( e ) {
+        showTooltips.call(this, e, getTargetSlice.call( this, e ));
+      });
+    }
+
+
+    init();
+    drawChart();
+    bindEvent();
+    </script>
+  </body>
+</html>
