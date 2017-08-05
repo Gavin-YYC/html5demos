@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<style type="text/css">
+*{
+    margin:0;
+    padding:0;
+}
+html{
+    background:linear-gradient(green 0%, #000 80%);
+    width:100%;
+    height:100%;
+}
+.wrap{
+    margin-top:200px;
+    perspective: 1000px;
+}
+.cube{
+    margin: 0 auto;
+    width:200px;
+    height:200px;
+    position:relative;
+    transform-style: preserve-3d;
+    -webkit-animation: 'move' 10s linear infinite;
+}
+@keyframes move{
+    0%{
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    100%{
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+.cube > div {
+    width:100%;
+    height:100%;
+    background-color: #ccc;
+    opacity: .4;
+    position: absolute;
+    text-align: center;
+    line-height: 200px;
+    font-family: "Microfost Yahei";
+    font-size: 30px;
+    border:1px solid #ccc;
+}
+.cube .cube-front{
+    transform: translateZ(100px);
+}
+.cube .cube-back{
+    transform: rotateX(180deg) translateZ(100px);
+}
+.cube .cube-left{
+    transform:rotateY(-90deg) translateZ(100px); 
+}
+.cube .cube-right{
+    transform: rotateY(90deg) translateZ(100px);
+}
+.cube .cube-top{
+    transform: rotateX(90deg) translateZ(100px);
+}
+.cube .cube-bottom{
+    transform:rotatex(-90deg) translateZ(100px); 
+}
+</style>
+<div class="wrap">
+    <div class="cube">
+        <div class="cube-front">前面</div>
+        <div class="cube-back">后面</div>
+        <div class="cube-left">左面</div>
+        <div class="cube-right">右面</div>
+        <div class="cube-top">上面</div>
+        <div class="cube-bottom">下面</div>
+
+        <span class="smal-front"></span>
+        <span class="smal-back"></span>
+        <span class="smal-left"></span>
+        <span class="smal-right"></span>
+        <span class="smal-top"></span>
+        <span class="smal-bottom"></span>
+    </div>
+</div>
+</body>
+</html>

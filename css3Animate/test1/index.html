@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>css3 animate</title>
+<link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+<div class="box">
+    <div class="formgroup">
+        <div class="form_rem">
+            <input type="checkbox" />
+            <label>Remember me</label>
+            <i>i</i>
+        </div>
+        <div class="telbox">
+            <p>
+                For security,please enter your<br>
+                <span>mobole phone number:</span>
+            </p>        
+            <input type="text" placeholder="(555)123-1234" />
+        </div>
+    </div>
+    <div class="formgroup">
+        <button>Pay $25.00</button>
+    </div>
+</div>
+<script>
+var checkBtn = document.querySelector(".form_rem input"),
+    telBox = document.querySelector(".telbox"),
+    telArea = telBox.querySelector("input"),
+    formRem = document.querySelector(".form_rem"),
+    box = document.querySelector(".box"),
+    btn = document.querySelector("button");
+var timer;
+window.onload = function(){
+    checkBtn.onclick = function(){
+        if(this.checked){
+            //初始化状态
+            var boxH = parseInt(window.getComputedStyle(box).height);
+            var btnTop = btn.getBoundingClientRect().top;
+            console.log(btnTop)
+            telBox.style.height = "auto";
+            box.style.height = "auto";
+            //重新获取之后的状态
+            var height = window.getComputedStyle(telBox).height;
+            var targetBoxH = parseInt(window.getComputedStyle(box).height);
+            var btnTarTop = btn.getBoundingClientRect().top;
+            console.log(btnTarTop)
+            //重新赋值新状态
+            //telBox.style.height = height;
+            timer = setInterval(function(){
+                if(boxH >= targetBoxH){
+                    clearInterval(timer);
+                }else{
+                    box.style.height = boxH + 'px';
+                    boxH+=20;
+                }
+            },15);
+            //增加其他效果
+            telBox.classList.add("animate");
+            telArea.focus();
+        }else{
+            telBox.classList.remove("animate");
+            telBox.style.height = "0px";
+            box.style.height = "auto";
+        }
+        formRem.classList.toggle("checked");
+    }
+}
+</script>
+</body>
+</html>

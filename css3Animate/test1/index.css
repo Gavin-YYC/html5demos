@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color:#494A4E;
+    font-size:100%;
+    font-size:15px;
+}
+.box{
+    width:300px;
+    margin: 0 auto;
+    margin-top:200px;
+    background-color:#F6F4FA;
+    border-radius:5px;
+    box-shadow: 0 0 10px #000;
+    padding-bottom:15px;
+    padding-top:15px;
+    height:auto;
+    transition: all 1s cubic-bezier(.05,.62,.53,1.02);
+}
+.formgroup{
+    width:80%;
+    margin:0 auto;
+    padding-bottom:15px;
+    padding-top:15px;
+    overflow:hidden;
+}
+.formgroup .form_rem{
+    height:35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    line-height:35px;
+    padding: 0 10px;
+    position:relative;
+}
+.formgroup .form_rem.checked{
+    border-radius: 5px 5px 0px 0px;
+}
+.formgroup .telbox{
+    border-radius:0 0 5px 5px;
+    height:0px;
+    overflow:hidden;
+    border:1px solid #ccc;
+    border-top:none;
+    border-bottom:none;
+    transform: perspective(300px) rotateX(-90deg);
+    transform-origin: center top;
+    transition: all 0.3s cubic-bezier(.05,.62,.53,1.02);
+}
+.formgroup .telbox.animate{
+    transform: rotateX(0deg);
+    border-bottom:1px solid #ccc;
+}
+.formgroup .telbox p{
+    padding: 10px;
+}
+.formgroup .telbox p span{
+    font-weight:bold;
+}
+.formgroup .telbox input{
+    width:100%;
+    height:35px;
+    display:block;
+    border:none;
+    border-radius:5px;
+}
+.formgroup button{
+    width:100%;
+    height:35px;
+    line-height:35px;
+    text-align:center;
+    background-color:#1C93E3;
+    border:none;
+    border-radius:5px;
+}
+
+.round{
+    -webkit-animation:'easeMove' 1s ease infinite;
+}
+@keyframes easeMove{
+    0%{
+        background-color:red;
+    } 
+    50%{
+        background-color:yellow;
+    }
+    100%{
+        background-color:blue
+    }
+}

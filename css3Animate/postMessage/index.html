@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>postMessage</title>
+</head>
+<body>
+<input type="text" id="message"><button>发送消息</button>
+<iframe src="http://sandbox.runjs.cn/show/c4bbcmfc" id="iframe1"></iframe>
+
+
+<script>
+window.onload = function(){
+    var message = document.getElementById("message"),
+        btn = document.getElementsByTagName("button")[0],
+        iframe = document.getElementById("iframe1");
+
+    var iWin = iframe.contentWindow;
+
+    btn.onclick = function(){
+        iWin.postMessage(message.value,"http://sandbox.runjs.cn/");
+    }
+
+    window.onmessage = function(e){
+        alert(e.data);
+        e.source.postMessage("Down!", e.origin);
+    }
+}
+</script>
+</body>
+</html>

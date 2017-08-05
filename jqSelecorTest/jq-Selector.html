@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jquery选择器全接触</title>
+	<link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+<body>
+<!--效果展示区域-->
+<div class="main">
+	#boxGroup
+	<div id="boxGroup" name="yangyoucun">
+		<div class="box">box1</div>
+		<div class="box" name="abc">box2</div>
+		<div class="box">box3</div>
+		<div class="box">box4</div>
+	</div>
+	<p id="page">这是一个段落</p>
+	<ul class="ul">
+		ul.ul
+		<li><a href="#boxGroup" >ul-li-1</a></li>
+		<li>ul-li-2
+			<ul class="sub-ul">
+				ul.ul-li-ul.sub-ul
+				<li>ul-li-ul-li-1  yangyoucun</li>
+				<li>ul-li-ul-li-2  yangyou</li>
+				<li>ul-li-ul-li-3  yang</li>
+			</ul>
+		</li>
+		<div class="ul-div" name="abcde">ul-di
+			<ul>ul-div-ul
+				<li>ul-div-ul-li-1</li>
+				<li lang="en-us">ul-div-ul-li-2</li>
+				<li>ul-div-ul-li-3</li>
+			</ul>
+		</div>
+		<li name="xxxabc">ul-li-3</li>
+		<li>ul-li-4
+			<ul>
+				<li>ul-li-ul-li-1</li>
+			</ul>
+		</li>
+	</ul>
+	<p>这又是一个段落yangyoucun</p>
+	<ul>
+		这是一个ul
+		<li lang="en">li-1</li>
+		<li name="111abc">li-2</li>
+		<li>li-3</li>
+	</ul>
+	<h1>h1</h1>
+	<h2>h2</h2>
+	<h3>h3</h3>
+
+	<div id="form-group">
+		用户表单
+		<form action="#" method="post">
+			<div>
+				<label for="name">你的姓名:</label>
+				<input type="text" name="name" id="name" value="" tabindex="1" />
+				<label for="pass">密码:</label>
+				<input type="password" name="pass" id="pass" value="" tabindex="1" disabled="disabled" placeholder="该表单被禁用了" />
+			</div>
+	
+
+			<label for="picbtn">图片按钮:</label>
+			<input type="image" src="http://www.w3school.com.cn/i/eg_submit.jpg" name="picbtn">
+
+			<input type="file">
+
+			<input type="hidden" placeholder="隐藏的表单">
+		
+			<div>
+				<h4>爱好</h4>
+		
+				<label for="radio-choice-1">读书</label>
+				<input type="radio" name="radio-choice-1" id="radio-choice-1" tabindex="2" value="choice-1" />
+		
+				<label for="radio-choice-2">写字</label>
+				<input type="radio" name="radio-choice-1" id="radio-choice-2" tabindex="3" value="choice-2" />
+			</div>
+		
+			<div>
+				<label for="select-choice">城市:</label>
+				<select name="select-choice" id="select-choice">
+					<option value="Choice 1">北京</option>
+					<option value="Choice 2">上海</option>
+					<option value="Choice 3">深圳</option>
+				</select>
+			</div>
+			
+			<div>
+				<label for="textarea">个人说明:</label>
+				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			</div>
+			
+			<div>
+				<label for="checkbox">是否同意用户协议:</label>
+				<input type="checkbox" name="checkbox" id="checkbox" />
+			</div>
+		
+			<div>
+				<input type="submit" value=" 提交 " />
+				<button>登录</button>
+				<input type="reset" value="重置">
+			</div>
+		</form>
+	</div>
+</div>
+
+<!--命令区域-->
+<div class="commander">
+	<a href="" class="clear" data-title="清除所有选中效果">清除所有选中效果</a>
+	<p>基本选择器</p>
+	<hr>
+	<a href="" data-value="#boxGroup" 	data-title="选中id为boxGroup的元素">#boxGroup</a>
+	<a href="" data-value="p" 			data-title="选中p元素">p</a>
+	<a href="" data-value=".box" 		data-title="选中class为box的元素">.box</a>
+	<a href="" data-value="*" 			data-title="选中所有元素">*</a>
+	<a href="" data-value=".box,p,ul" 	data-title="同时选中.box，p以及ul元素">.box,p,ul</a>
+	<p>层级选择器</p>
+	<hr>
+	<a href="" data-value=".ul li" 		data-title="选中class为ul内的所有li">.ul li</a>
+	<a href="" data-value=".ul>li" 		data-title="选中class为ul的所有子li">.ul > li</a>
+	<a href="" data-value="p + ul" 		data-title="选中紧跟在p后的ul元素（*紧跟*）">p + ul</a>
+	<a href="" data-value="#boxGroup ~ p" 	data-title="选中id为boxGroup后面的所有p元素">#boxGroup ~ p</a>
+	<p>基本筛选器</p>
+	<hr>
+	<a href="" data-value="ul li:first"	data-title="选中第一个li">ul li:first</a>
+	<a href="" data-value=".box:last"	data-title="选中最后一个.box">.box:last</a>
+	<a href="" data-value=".box:even"	data-title="选中奇数.box">.box:even</a>
+	<a href="" data-value=".box:odd"	data-title="选中偶数.box">.box:odd</a>
+	<a href="" data-value=".box:eq(2)"	data-title="选中第3个.box，从0开始">.box:eq(2)</a>
+	<a href="" data-value=".box:gt(1)"	data-title="大于第二个都选中，从0开始">.box:gt(1)</a>
+	<a href="" data-value=".box:lt(3)"	data-title="小于第四个都选中，从0开始">.box:lt(3)</a>
+	<a href="" data-value=":not(p,#boxGroup,.box)"	data-title="去除所有与给定选择器匹配的元素，本例中，获取所有元素，去除p标签，去除id为boxGroup以及class为box的容器，该选择器应用在表单中情况较多，获取所有未选中的，实现全选、反选功能
+">:not(p,#boxGroup,.box)</a>
+	<a href="" data-value=":header"		data-title="选中标题元素：h1~h6">:header</a>
+	<a href="" data-value=":lang(en)"	data-title="选中指定语言的所有元素，指定语言通过lang，$(':lang(en)')将获取en以及en-us、en-xx语言的元素，注意en-之间不能有空格！如果html中设置了lang=en，执行此查询将获取所有元素！<br>版本：1.9+">:lang(en)</a>
+	<a href="" data-value=":target"		data-title="这个不太好理解，点击此链接不会高亮！因为在URI中并没有相对应的hash！先点击右侧第二个li的链接，然后在点此按钮，便会高亮#boxGroup。也就是说，URI中存在正确的hash，则会选中hash对应的容器。<br>版本：1.9+">:target</a>
+	<a href="" data-value=":root"		data-title="选中页面根元素，即html<br>版本：1.9+">:root</a>
+	<a href="" data-value=":focus"		data-title="当前获取焦点的元素，点击此按钮无效果。但是依然可以获取，只不过在获取焦点时触发。">:focus</a>
+	<a href="" data-value=":animated"	data-title="无效果！匹配所有正在执行动画效果的元素">:animated</a>
+	<p>属性选择器</p>
+	<hr>
+	<a href="" data-value="div[id]"	data-title="div[id]，选中所有含id属性的元素">[attribute]</a>
+	<a href="" data-value="input[type='text']"	data-title="input[type='text']，选中input中type为text的元素">[attribute=value]</a>
+	<a href="" data-value="input[type!='text']"	data-title="input[type!='text']，选中input中type不是text的元素">[attribute!=value]</a>
+	<a href="" data-value="div[name^='abc']"	data-title="div[name^='abc']，^在正则中表示以什么开头，在此表示所有以value值开头的div元素，比如abc，abcde，abc111，abc222都会选中">[attribute^=value]</a>
+	<a href="" data-value="li[name$='abc']"	data-title="li[name$='abc']，^在正则中表示以什么结尾，在此表示所有以value值结尾的li元素，比如xxxabc，111abc，222abc都会选中">[attribute^=value]</a>
+	<a href="" data-value="[name*='abc']"	data-title="[name*='abc']，只要包含value值便会选中。abc、111abc222、ababcde等都会选中">[attribute*=value]</a>
+	<a href="" data-value="[name^='yang'][name$='cun'][name*='you']"	data-title="复合属性选择器，[name^='yang'][name$='cun'][name*='you']，以yang开头，cun结尾，并且包含you时才选中，同时满足条件才选中"> [attrSel1][attrSel2][attrSelN]</a>
+	<p>子元素选择器（同css3选择器一致）</p>
+	<hr>
+	<a href="" data-value="ul li:first-child"	data-title="匹配第一个元素，类似:first，但:first-child将为每个父元素匹配第一个子元素，可分别点击两个查看效果">ul li:first-child</a>
+	<a href="" data-value="ul li:last-child"	data-title="匹配最后一个元素，类似:last，但:last-child将为每个父元素匹配第一个子元素，效果可参考:first-child">ul li:last-child</a>
+	<a href="" data-value="ul li:nth-child(4n+2)"	data-title="匹配其父元素下的第N个子或奇偶元素，类似:eq(index)，但:nth-child将为每个父元素匹配指定的子元素，效果可参考:first-child。<br>:nth-chid从1开始，而:eq()从0开始，可以使用even（奇数）、odd（偶数），可以是任意数字，也可以是an+b的形式，a是循环周期，n是计数器，从0开始，b是偏移，4n+2表示，每四个进行高亮，高亮第二个">:nth-child(4n+2)</a>
+	<a href="" data-value="ul li:nth-last-child(3)"	data-title="选择所有他们父元素的第n个子元素。计数从最后一个元素开始到第一个。参数可为：n|even|odd|an+b，参考：nth-child()<br>版本：1.9+">ul li:nth-last-child(3)</a>
+	<a href="" data-value="ul li:only-child"	data-title="如果某个元素是父元素中唯一的子元素，那将会被匹配">ul li:only-child</a>
+	<a href="" data-value="ul li:first-of-type"	data-title="结构化伪类，匹配E的父元素的第一个E类型的子元素，即匹配前后的类型一致<br>版本：1.9+，如果第一个元素不是li元素，则继续向下查找">ul li:first-of-type</a>
+	<a href="" data-value="ul li:last-of-type"	data-title="结构化伪类，匹配E的父元素的最后一个E类型的子元素，即匹配前后的类型一致<br>版本：1.9+">ul li:last-of-type</a>
+	<a href="" data-value="ul li:nth-last-of-type(3)"	data-title="选择的所有他们的父级元素的第n个子元素，计数从最后一个元素到第一个。<br>版本：1.9+">ul li:nth-last-of-type(3)</a>
+	<a href="" data-value="ul li:nth-of-type(3)"	data-title="选择同属于一个父元素之下，并且标签名相同的子元素中的第n个。参数参考nth-child<br>版本：1.9+">ul li:nth-of-type(3)</a>
+	<a href="" data-value="ul li:only-of-type"	data-title="选择所有没有兄弟元素，且具有相同的元素名称的元素。<br>版本：1.9+">ul li:only-of-type</a>
+	<p>表单选择器</p>
+	<hr>
+	<a href="" data-value=":input" 		data-title="匹配所有 input, textarea, select 和 button 元素">:input</a>
+	<a href="" data-value=":text" 		data-title="匹配所有的type='text'表单元素">:text</a>
+	<a href="" data-value=":password" 	data-title="匹配所有的type='password'表单元素">:password</a>
+	<a href="" data-value=":button" 	data-title="匹配所有的button元素">:button</a>
+	<a href="" data-value=":radio" 		data-title="匹配所有单选按钮，此时无效果，因为默认的背景色对该控件无效，但存在active类，说明选中成功">:radio</a>
+	<a href="" data-value=":submit" 	data-title="匹配所有的提交按钮，会连button一起选中。">:submit</a>
+	<a href="" data-value=":image" 		data-title="匹配所有的图片按钮，即type='image'，通过src设置按钮图片">:image</a>
+	<a href="" data-value=":reset" 		data-title="匹配所有的重置按钮">:reset</a>
+	<a href="" data-value=":checkbox" 	data-title="匹配所有复选框，此时无效果，因为默认的背景色对该控件无效，但存在active类，说明选中成功">:checkbox</a>
+	<a href="" data-value=":file" 		data-title="匹配所有的文件上传表单">:file</a>
+	<p>表单对象属性选择器</p>
+	<hr>
+	<a href="" data-value=":enabled" 		data-title="匹配所有的可用元素，默认表单元素除了disabled都是激活的">:enabled</a>
+	<a href="" data-value=":disabled" 		data-title="匹配所有设置disabled的元素，即不可用元素">:disabled</a>
+	<a href="" data-value=":checked" 		data-title="匹配所有选中的元素，包括radio、checkbox、select，但是select建议使用:select，效果在这无法看到，可审查元素查看class">:checked</a>
+	<a href="" data-value=":selected" 		data-title="匹配所有select中option下拉列表选中的元素，效果在这无法看到，可审查元素查看class">:selected</a>
+	<p>可见性选择器</p>
+	<hr>
+	<a href="" data-value=":visible" 		data-title="匹配所有的可见元素">:visible</a>
+	<a href="" data-value=":hidden" 		data-title="匹配所有的隐藏元素，当然没效果了，因为隐藏的看不见啦~但确实选中了，可审查元素查看class">:hidden</a>
+	<p>内容选择器</p>
+	<hr>
+	<a href="" data-value=":contains('yangyoucun')" 	data-title="匹配包含给定文本的元素，在这里，如果内容中包含yangyoucun，则选中。注意：内容选择器选中的是包含该内容的父元素的父元素，如果是li，则选中li的父元素ul。">:contains('yangyoucun')</a>
+	<a href="" data-value=":empty" 				data-title="选中所有内容为空的元素">:empty</a>
+	<a href="" data-value=":has(.box)" 			data-title="一个用于筛选的选择器，选中has中的匹配的元素">:has(.box)</a>
+	<a href="" data-value=":parent" 			data-title="匹配含有子元素或者文本的元素，空格也算是含有文本。和:empty情况相反，有些内容刚开始就是空的，这些元素有：input、img、br、hr">:parent</a>
+	<div class="show"></div>
+</div>
+
+<p align="center">Gavin's jQuery selector test</p>
+
+<!--脚本-->
+<script type="text/javascript" src="./jquery-2.2.0.js"></script>
+<script type="text/javascript" src="./main.js"></script>
+</body>
+</html>

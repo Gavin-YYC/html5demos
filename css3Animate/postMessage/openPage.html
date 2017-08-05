@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>postMessage openPage</title>
+</head>
+<body>
+    <button id="obtn">弹出新窗口</button><br>
+    <input type="text" id="message" />
+    <button id="send">发送信息</button>
+<script>
+window.onload = function(){
+    var oBtn = document.getElementById("obtn"),
+        send = document.getElementById("send"),
+        message = document.getElementById("message"),
+        newFra;
+
+    oBtn.onclick = function(){
+        newFra = window.open("http://localhost:8080");
+    }
+
+    send.onclick = function(){
+        newFra.postMessage(message.value, "http://localhost:8080");
+    }
+
+    window.onmessage = function(e){
+        alert(e.data);
+    }
+}
+</script>
+</body>
+</html>
